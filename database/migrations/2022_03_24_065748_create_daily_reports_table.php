@@ -15,7 +15,7 @@ class CreateDailyReportsTable extends Migration
     {
         Schema::create('daily_reports', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('report_date');
+            $table->date('report_date');
             $table->bigInteger('total_runtime');
             $table->bigInteger('total_downtime');
             $table->bigInteger('total_pcs');

@@ -51,10 +51,4 @@ class ProductionApiRequest extends FormRequest
             'data'      => $validator->errors()
         ]));
     }   
-
-    // public function messages(){
-    //     return [
-    //         'required'  => 'Kolom :attribute harus diisi.'
-    //     ];
-    // }
 }
