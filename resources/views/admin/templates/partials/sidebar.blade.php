@@ -40,7 +40,7 @@
             </li>
           @endguest
           @if(Auth::user()->getRoleNames()[0] == 'admin')
-          <li class="nav-header">ADMIN</li>
+            <li class="nav-header">ADMIN</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-copy"></i>
@@ -99,7 +99,6 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
-      @endguest
     </div>
     <!-- /.sidebar -->
   </aside>
