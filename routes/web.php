@@ -27,6 +27,13 @@ Route::get('/dailyReport', 'DailyReportController@index')
 ->middleware(['verified'])->name('dailyReport.index');
 Route::get('/dailyReport/ajaxRequestAll', 'DailyReportController@ajaxRequestAll')
 ->middleware(['verified'])->name('dailyReport.ajaxRequestAll');
+<<<<<<< HEAD
+=======
+Route::get('/dailyReport/getCustomFilterData', 'DailyReportController@getCustomFilterData')
+->middleware(['verified'])->name('dailyReport.getCustomFilterData');
+Route::post('/dailyReport/calculateSearchResult', 'DailyReportController@calculateSearchResult')
+->middleware(['verified'])->name('dailyReport.calculateSearchResult');
+>>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
 
 Route::get('/workorder', 'WorkorderController@index')
 ->middleware(['verified'])->name('workorder.index');

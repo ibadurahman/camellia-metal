@@ -54,6 +54,11 @@ class DailyReportApiController extends Controller
         ],201);
     }
 
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
     /**
      * Display the specified resource.
      *

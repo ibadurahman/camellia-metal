@@ -43,8 +43,13 @@ class OeeApiController extends Controller
     {
         //
         $data = $request->all();
+<<<<<<< HEAD
         
         $workorderId = Workorder::select('id')->where('wo_number',$data['workorder_id'])->first();
+=======
+
+        $workorderId = Workorder::select('id')->where('id',$data['workorder_id'])->first();
+>>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
         if(!$workorderId)
         {
             return response()->json([
@@ -62,10 +67,13 @@ class OeeApiController extends Controller
 
         $data['workorder_id'] = $workorderId->id;
 
+<<<<<<< HEAD
         // return response()->json([
         //     'messages'=>$data
         // ],201);
 
+=======
+>>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
         Oee::create($data);
 
         $smeltingData = Smelting::select('id')->where('workorder_id',$workorderId->id)->get();
