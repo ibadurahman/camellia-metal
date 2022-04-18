@@ -115,6 +115,7 @@ class WorkorderController extends Controller
 
     public function getOee(Request $request)
     {
+
         $oee = Oee::where('workorder_id',$request->workorder_id)->first();
         $productions = Production::where('workorder_id',$request->workorder_id)->get();
         $totalProductions = 0;
@@ -122,11 +123,12 @@ class WorkorderController extends Controller
         {
             $totalProductions += $prod->pcs_per_bundle;
         }
-
-        if($totalProductions > 0){
+        $totalProductions = 2000;
+        $oeeResult = [0,0,0,0];
+        if ($totalProductions > 0) {
             $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $totalProductions, 3);
         }
-
+        
         $oee = Oee::where('workorder_id',$request->workorder_id)->first();
         return response()->json([
             $oeeResult[0],

@@ -335,7 +335,7 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getDowntime')}}',
+            url: "{{route('workorder.getDowntime')}}",
             data: {
                 workorder_id:'{{$workorder->id}}}',
                 data:'management_time',
@@ -382,7 +382,7 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getDowntime')}}',
+            url: "{{route('workorder.getDowntime')}}",
             data: {
                 workorder_id:'{{$workorder->id}}}',
                 data:'downtime',
@@ -435,18 +435,19 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getOee')}}',
+            url: "{{route('workorder.getOee')}}",
             data: {
-                workorder_id:'{{$workorder->id}}}',
+                workorder_id:'{{$workorder->id}}',
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                var pieChartCanvas=$('#oee-chart-canvas').get(0).getContext('2d');
+                var pieChartCanvas=document.getElementById('oee-chart-canvas').getContext('2d');
                 var pieData=    {
                                     labels:['OEE','Waste'],
                                     datasets:[
                                                 {
-                                                    data:[response[0],100-response[0]],
+                                                    data:[80,100],
+                                                    // data:[response[0],100-response[0]],
                                                     backgroundColor:['#00a65a','#f56954']
                                                 }
                                             ]
