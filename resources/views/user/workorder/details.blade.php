@@ -437,7 +437,7 @@
             dataType: "json", 
             url: '{{route('workorder.getOee')}}',
             data: {
-                workorder_id:'{{$workorder->id}}}',
+                workorder_id:'{{$workorder->id}}',
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
