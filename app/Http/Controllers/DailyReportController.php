@@ -29,8 +29,6 @@ class DailyReportController extends Controller
                 ->toJson();
     }
 
-<<<<<<< HEAD
-=======
     public function getCustomFilterData(Request $request)
     {
         $dailyReport    = DailyReport::query();
@@ -90,7 +88,6 @@ class DailyReportController extends Controller
         ],200);
     }
 
->>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
     /**
      * Show the form for creating a new resource.
      *

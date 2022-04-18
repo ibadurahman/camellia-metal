@@ -51,10 +51,7 @@ class ProductionApiController extends Controller
         //
         $data = $request->all();
 
-<<<<<<< HEAD
-        $productionId = Production::select('id')->where('workorder_id',$data['workorder_id'])->where('bundle_num',$request['bundle_num'])->get();
-=======
-        $workorderId = Workorder::select('id')->where('id',$data['workorder_id'])->first();
+        $workorderId = Workorder::select('id')->where('wo_number',$data['workorder_id'])->first();
         if(!$workorderId)
         {
             return response()->json([
@@ -63,7 +60,6 @@ class ProductionApiController extends Controller
         }
 
         $productionId = Production::select('id')->where('workorder_id',$workorderId->id)->where('bundle_num',$request['bundle_num'])->get();
->>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
         if(count($productionId)!=0)
         {
             return response()->json([
@@ -71,19 +67,7 @@ class ProductionApiController extends Controller
             ],400);
         }
 
-<<<<<<< HEAD
-        $workorderId = Workorder::select('id')->where('id',$data['workorder_id'])->get();
-        if(count($workorderId)==0)
-        {
-            return response()->json([
-                'messages'=>'workorder data not found'
-            ],404);
-        }
-
-        $smeltingId = Smelting::select('id')->where('workorder_id',$workorderId[0]['id'])->where('bundle_num',$request['bundle_num'])->get();
-=======
         $smeltingId = Smelting::select('id')->where('workorder_id',$workorderId->id)->where('bundle_num',$request['bundle_num'])->get();
->>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
         if(count($smeltingId)==0)
         {
             return response()->json([
@@ -91,17 +75,6 @@ class ProductionApiController extends Controller
             ],404);
         }
 
-<<<<<<< HEAD
-        Production::create($data);
-
-        $smeltingData = Smelting::select('id')->where('workorder_id',$data['workorder_id'])->get();
-        $smeltingNum = count($smeltingData);
-        $productionData = Production::select('id')->where('workorder_id',$data['workorder_id'])->get();
-        $productionNum = count($productionData);
-        $oeeData        = Oee::select('id')->where('workorder_id',$data['workorder_id'])->first();
-        if($smeltingNum == $productionNum && $oeeData != null){
-            Workorder::where('id',$data['workorder_id'])->update(['status_wo'=>1,'status_prod'=>0]);
-=======
         $data['workorder_id'] = $workorderId->id;
 
         Production::create($data);
@@ -113,7 +86,6 @@ class ProductionApiController extends Controller
         $oeeData        = Oee::select('id')->where('workorder_id',$workorderId->id)->first();
         if($smeltingNum == $productionNum && $oeeData != null){
             Workorder::where('id',$workorderId->id)->update(['status_wo'=>1,'status_prod'=>0]);
->>>>>>> 7f83a741feb19833503f2683c83cfe0e246ada09
         }
         
         return response()->json([
