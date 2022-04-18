@@ -235,6 +235,7 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                             @if ($oee_val != 0)
+                                <h1 class="text-muted">OEE</h1>
                                 <div class="card-body">
                                     <div class="tab-content p-0">
                                         <div class="chart tab-pane active" id="oee-chart" style="position: relative; height: 300px;">

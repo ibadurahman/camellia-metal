@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/','HomeController@index')->middleware(['verified'])->name('dashboard');
-
 Route::get('/user/data', 'DataController@users')->middleware(['verified'])->name('user.data');
 Route::get('/workorder/data', 'DataController@workorders')->middleware(['verified'])->name('workorder.data');
 Route::get('/workorder/dataonprocess', 'DataController@workordersOnProcess')->middleware(['verified'])->name('workorder.dataonprocess');

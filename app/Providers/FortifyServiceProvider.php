@@ -27,10 +27,6 @@ class FortifyServiceProvider extends ServiceProvider
             
             public function toResponse($request)
             {
-                if(Auth::user()->hasRole('admin'))
-                {
-                    return redirect()->route('admin.dashboard');
-                }
                 return redirect('/');
             }
         });
