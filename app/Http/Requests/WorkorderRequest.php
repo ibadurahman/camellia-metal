@@ -31,30 +31,30 @@ class WorkorderRequest extends FormRequest
 
         return [
             //
-            'wo_number'         =>['required',$rule_wo_unique],
-            'bb_supplier'       =>['required'],
-            'bb_grade'          =>['required'],
-            'bb_diameter'       =>['required'],
-            'bb_qty_pcs'        =>['required'],
-            'bb_qty_coil'       =>['required'],
-            'fg_customer'       =>['required'],
-            'fg_size_1'         =>['required'],
-            'fg_size_2'         =>['required'],
-            'tolerance_plus'    =>['required'],
-            'tolerance_minus'   =>['required'],
-            'fg_reduction_rate' =>['required'],
-            'fg_shape'          =>['required'],
-            'fg_qty'            =>['required'],
-            'operator'          =>['required'],
-            'machine_id'        =>['required'],
-            'production_date'   =>['required'],
+            'wo_number'             =>['required',$rule_wo_unique,],
+            'bb_supplier'           =>['required'],
+            'bb_grade'              =>['required'],
+            'bb_diameter'           =>['required','numeric'],
+            'bb_qty_pcs'            =>['required','numeric'],
+            'bb_qty_coil'           =>['required','numeric'],
+            'fg_customer'           =>['required'],
+            'straightness_standard' =>['required','numeric'],
+            'fg_size_1'             =>['required','numeric'],
+            'fg_size_2'             =>['required','numeric'],
+            'tolerance_minus'       =>['required','numeric'],
+            'fg_reduction_rate'     =>['required','numeric'],
+            'fg_shape'              =>['required'],
+            'fg_qty_kg'             =>['required','numeric'],
+            'fg_qty_pcs'            =>['required','numeric'], 
+            'machine_id'            =>['required'],
         ];
     }
 
     public function messages()
     {
         return [
-            'required'  => 'Kolom :attribute harus diisi.'
+            'required'  => 'Kolom :attribute harus diisi.',
+            'numeric'   => 'Isian harus berupa angka.'
         ];
     }
 }

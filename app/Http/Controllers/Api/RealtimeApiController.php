@@ -57,7 +57,7 @@ class RealtimeApiController extends Controller
 
         Realtime::create($data);
 
-        Workorder::where('id',$workorderId->id)->update(['status_prod'=>1]);
+        Workorder::where('id',$workorderId->id)->update(['status_wo'=>'on process','wo_order_num'=>null]);
 
         return response()->json([
             'messages'=>'New data submited successfully'

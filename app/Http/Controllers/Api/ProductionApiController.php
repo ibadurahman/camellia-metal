@@ -85,7 +85,7 @@ class ProductionApiController extends Controller
         $productionNum = count($productionData);
         $oeeData        = Oee::select('id')->where('workorder_id',$workorderId->id)->first();
         if($smeltingNum == $productionNum && $oeeData != null){
-            Workorder::where('id',$workorderId->id)->update(['status_wo'=>1,'status_prod'=>0]);
+            Workorder::where('id',$workorderId->id)->update(['status_wo'=>'closed']);
         }
         
         return response()->json([
@@ -102,18 +102,17 @@ class ProductionApiController extends Controller
     public function show($id)
     {
         //
-        $data = Production::find($id);
+        // $data = Production::find($id);
 
-        if(is_null($data))
-        {
-            return response()->json([
-                'message'=>'Resouce not found!'
-            ],404);
-        }
+        // if(is_null($data))
+        // {
+        //     return response()->json([
+        //         'message'=>'Resouce not found!'
+        //     ],404);
+        // }
 
-        return new ProductionResource($data);
-
-        // return response()->json($data, 200);
+        // return new ProductionResource($data);
+        // // return response()->json($data, 200);
     }
 
     /**

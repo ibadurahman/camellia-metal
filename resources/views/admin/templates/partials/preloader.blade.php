@@ -1,4 +1,4 @@
-  {{-- <!-- Preloader -->
+  <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> --}}
+    <img class="animation__shake" src="{{asset('dist/img/CamelliaMetalLogo.png')}}" alt="CamelliaMetalLogo" height="130" width="530">
+  </div>

@@ -21,20 +21,21 @@ class Workorder extends Model
         'bb_qty_pcs',
         'bb_qty_coil',
         'fg_customer',
+        'straightness_standard',
         'fg_size_1',
         'fg_size_2',
-        'tolerance_plus',
         'tolerance_minus',
         'fg_reduction_rate',
         'fg_shape',
-        'fg_qty',
+        'fg_qty_kg',
+        'fg_qty_pcs',
         'wo_order_num',
-        'operator',
-        'status_prod',
+        // 'status_prod',
         'status_wo',
+        // 'status_smelting',
         'machine_id',
-        'production_date',
         'user_id',
+        'remarks'
     ];
 
     public function user()

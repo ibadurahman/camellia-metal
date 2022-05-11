@@ -56,20 +56,21 @@ class WorkorderController extends Controller
                     }
                     return $oee->total_downtime;
                 })
-                ->addColumn('status_prod',function(Workorder $model){
-                    if($model->status_prod == 1){
-                        return '<p class="btn btn-success">On Process</p>';
-                    }
-                    return '-';
-                })
-                ->addColumn('status_wo',function(Workorder $model){
-                    if($model->status_wo == 1){
-                        return '<p class="btn btn-success">Closed</p>';
-                    }
-                    return '<p class="btn btn-danger">Open</p>';
-                })
+                // ->addColumn('status_prod',function(Workorder $model){
+                //     if($model->status_prod == 1){
+                //         return '<p class="btn btn-success">On Process</p>';
+                //     }
+                //     return '-';
+                // })
+                // ->addColumn('status_wo',function(Workorder $model){
+                //     if($model->status_wo == 'draft'){
+                //         return '<p class="btn btn-success">Closed</p>';
+                //     }
+                //     return '<p class="btn btn-danger">Open</p>';
+                // })
                 ->addColumn('action','user.workorder.action')
-                ->rawColumns(['status_wo','status_prod','action'])
+                // ->rawColumns(['status_wo','status_prod','action'])
+                ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->toJson();
     }

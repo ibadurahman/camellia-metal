@@ -53,25 +53,43 @@
                 <li class="nav-item">
                   <a href="{{route('admin.user.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
-                    <p>Admin: Users</p>
+                    <p>Users</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('admin.supplier.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-building"></i>
+                    <p>Suppliers</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('admin.customer.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-handshake"></i>
+                    <p>Customer</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('admin.workorder.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-list"></i>
-                    <p>Admin: Workorders</p>
+                    <i class="nav-icon fas fa-clipboard"></i>
+                    <p>Workorders</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('admin.workorder.closed')}}" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <p>Closed Workorder</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('admin.production.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-cash-register"></i>
-                    <p>Admin: Productions</p>
+                    <p>Productions</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('admin.oee.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-chart-line"></i>
-                    <p>Admin: OEE</p>
+                    <p>OEE</p>
                   </a>
                 </li>
               </ul>

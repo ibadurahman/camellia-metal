@@ -26,7 +26,7 @@ class RealtimeController extends Controller
     public function ajaxRequest()
     {
         //
-        $woId =  Workorder::where('status_prod',1)->orderBy('wo_order_num','asc')->first();
+        $woId =  Workorder::where('status_wo','on process')->orderBy('wo_order_num','asc')->first();
         if(!$woId)
         {
             return response()->json([
@@ -44,7 +44,7 @@ class RealtimeController extends Controller
     public function ajaxRequestAll()
     {
         //
-        $woId =  Workorder::where('status_prod',1)->orderBy('wo_order_num','asc')->first();
+        $woId =  Workorder::where('status_wo','on process')->orderBy('wo_order_num','asc')->first();
         if(!$woId)
         {
             return response()->json([
@@ -69,9 +69,9 @@ class RealtimeController extends Controller
     public function workorderOnProcess()
     {
         //
-        $data =  Workorder::where('status_prod',1)->orderBy('wo_order_num','asc')->first();
+        $data =  Workorder::where('status_wo','on process')->orderBy('wo_order_num','asc')->first();
         if(!$data){
-            return null;
+            return response('no data',404);
         }
         return response()->json([
             'wo_number'     => $data['wo_number'],

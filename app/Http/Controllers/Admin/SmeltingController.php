@@ -31,25 +31,48 @@ class SmeltingController extends Controller
         return view('admin.smelting.create',[
             'title'        => 'Admin: Create Smelting',
             'wo_id'        => $workorder->id,
-            'wo_number'    => $workorder->wo_number
+            'wo_number'    => $workorder->wo_number,
+            'numberOfCoil' => $workorder->bb_qty_coil
         ]);
     }
 
     public function addSmelting(SmeltingRequest $request){
         $bundleNum = Smelting::where('workorder_id',$request->wo_id)->max('bundle_num');
+        $bundleCollection = Smelting::where('workorder_id',$request->wo_id)->orderBy('bundle_num','asc')->get();
+
         $bundleNum++;
+
+        for($i = 0; $i < count($bundleCollection); $i++)
+        {
+            if($bundleCollection[$i]->bundle_num != $i+1)
+            {
+                $bundleNum = $i+1; 
+                break;  
+            }
+        }
+        
+
         Smelting::create([
             'bundle_num'        =>$bundleNum,
             'workorder_id'      =>$request->wo_id,
             'weight'            =>$request->weight,
             'smelting_num'      =>$request->smelting_num,
-            'area'              =>$request->area,
+            // 'area'              =>$request->area,    
         ]);
 
         return response()->json([
             'message'=>'updated successfully'
         ],200);
     }
+
+    public function getDataWo(Request $request){
+        $bundleNum = Smelting::where('workorder_id',$request->wo_id)->count();
+        return response()->json([
+            'number_of_smelting'=>$bundleNum
+        ],200);
+    }
+
+    
 
     /**
      * Store a newly created resource in storage.

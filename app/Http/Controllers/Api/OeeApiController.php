@@ -70,7 +70,7 @@ class OeeApiController extends Controller
         $productionNum = count($productionData);
         $oeeData        = Oee::select('id')->where('workorder_id',$workorderId->id)->first();
         if($smeltingNum == $productionNum && $oeeData != null){
-            Workorder::where('id',$workorderId->id)->update(['status_wo'=>1,'status_prod'=>0]);
+            Workorder::where('id',$workorderId->id)->update(['status_wo'=>'closed']);
         }
 
         return response()->json([
