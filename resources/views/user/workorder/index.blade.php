@@ -24,7 +24,7 @@
                                         <th>Total Runtime</th>
                                         <th>Total Downtime</th>
                                         <th>Total Production</th>
-                                        <th>Status Production</th>
+                                        {{-- <th>Status Production</th> --}}
                                         <th>Status WO</th>
                                         <th>Action</th>
                                     </tr>
@@ -53,7 +53,7 @@
                 {data:'total_runtime'},
                 {data:'total_downtime'},
                 {data:'total_production'},
-                {data:'status_prod'},
+                // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'action'}
             ],

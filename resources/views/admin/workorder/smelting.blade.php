@@ -1,4 +1,4 @@
-<a href="{{route('admin.smelting.create',['id'=>$model])}}" class="btn btn-primary">Tambah Data Leburan</a>
+<a href="{{route('admin.smelting.create',['id'=>$model])}}" class="btn btn-primary">Data Leburan</a>
 
 <div class="card card-body">
     <table class="table-bordered table-hover">
@@ -7,7 +7,6 @@
                 <th>No. Bundle</th>
                 <th>Berat</th>
                 <th>No. Leburan</th>
-                <th>Area</th> 
             </tr>
         </thead>
         <tbody id="smelts-table-{{$model->id}}">
@@ -27,7 +26,7 @@
         success: function(data) {
             var content = '';
             for(let i = 0; i < data.length; i++){
-                content += '<tr><td>' + data[i].bundle_num + '</td><td>' + data[i].weight + '</td><td>' + data[i].smelting_num + '</td><td>' + data[i].area + '</td></tr>';
+                content += '<tr><td>' + data[i].bundle_num + '</td><td>' + data[i].weight + '</td><td>' + data[i].smelting_num + '</td></tr>';
             }
             $('tbody#smelts-table-{{$model->id}}').html(content);
         }

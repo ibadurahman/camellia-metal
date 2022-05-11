@@ -5,24 +5,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-tittle">Smelting Number</h3>
-                        </div>
-                        <div class="card-body">
-                            <table id="dataTable" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>WO Number</th>
-                                        <th>No. Bundle</th>
-                                        <th>Weight</th>
-                                        <th>No. Leburan</th>
-                                        <th>Area</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                    <div class="alert alert-warning" role="alert" id="alert_coil_number">
+                        {{-- <i class="fas fa-exclamation"></i> Number of Coil Needed : {{$numberOfCoil - }} --}}
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -31,6 +15,7 @@
                         <div class="card-body">
                             <form action="{{route('admin.smelting.store')}}" method="POST">
                                 @csrf
+                                <input type="text" hidden value="{{$numberOfCoil}}" id="number-of-coil">
                                 <input id="wo-id" name="wo_id" type="text" value="{{$wo_id}}" hidden>
                                 <div class="form-group">
                                     <label for="">WO Number</label>
@@ -53,7 +38,7 @@
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="">Area</label>
                                     <div class="row">
                                         <input id="smelt-area" name="area" type="text" class="form-control @error('area') is-invalid @enderror" placeholder="Area" value="{{old('area')}}">
@@ -61,15 +46,40 @@
                                             <span class="text-danger help-block">{{$message}}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <div class="row">
-                                        <button id="create-smelt" class="btn btn-primary">Add</button>
+                                        <div class="col-1">
+                                            <button id="create-smelt" class="btn btn-primary">Add</button>
+                                        </div>
+                                        <div class="col-1">
+                                            <a id="back-btn" href="{{route('admin.workorder.index')}}" class="btn btn-success">Done</a>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>    
+                    </div> 
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-tittle">Smelting Number</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="dataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>WO Number</th>
+                                        <th>No. Bundle</th>
+                                        <th>Weight</th>
+                                        <th>No. Leburan</th>
+                                        {{-- <th>Area</th> --}}
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                       
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -100,7 +110,7 @@
             {data:'bundle_num'},
             {data:'weight'},
             {data:'smelting_num'},
-            {data:'area'},
+            // {data:'area'},
             {data:'action'},
         ],
         "paging": true,
@@ -120,18 +130,18 @@
     $('#smelt-num').on('keyup',function(){
         newTest.smelting_num = $(this).val();
     });
-    $('#smelt-area').on('keyup',function(){
-        newTest.area = $(this).val();
-    });
+    // $('#smelt-area').on('keyup',function(){
+    //     newTest.area = $(this).val();
+    // });
     $('#create-smelt').on('click', function(event){
         event.preventDefault();
-		if(newTest.wo_id == null || newTest.weight == null || newTest.smelting_num == null || newTest.area == null){
+		if(newTest.wo_id == null || newTest.weight == null || newTest.smelting_num == null){
 			alert('Column cannot be null');
 		}else{
 			addRow(newTest)
 			$('#smelt-weight').val('');
 			$('#smelt-num').val('');
-			$('#smelt-area').val('');
+			// $('#selt-area').val('');
 		}
 	});
 
@@ -144,10 +154,12 @@
                 wo_id:obj.wo_id,
                 weight:obj.weight,
                 smelting_num:obj.smelting_num,
-                area:obj.area,
+                // area:obj.area,
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
+                console.log(response);
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -168,5 +180,59 @@
             }
         });
     }
+
+    //Get Number of Smelting
+    $.ajax({
+        type: "POST",
+        dataType: "json", 
+        url: '{{route('admin.smelting.getDataWo')}}',
+        data: {
+            wo_id   : $('#wo-id').val(),
+            _token  : '{{csrf_token()}}'
+        },
+        success: function(response) {
+            var result = $('#number-of-coil').val()-response.number_of_smelting;
+            if(result != 0){
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{{route('admin.workorder.setWoStatus')}}",
+                    data:{
+                        wo_id           : $('#wo-id').val(),
+                        state           : 'draft',
+                        _token          : '{{csrf_token()}}'
+                    }
+                });
+
+                $('#alert_coil_number').html("<i class='fas fa-exclamation'></i> Number of coil needed: " + result);
+                $('#alert_coil_number').removeClass("alert-success").addClass("alert-warning");
+                $('#smelt-weight').attr('readonly',false);
+                $('#smelt-num').attr('readonly',false);
+                // $('#smelt-area').attr('readonly',false);
+                $('#create-smelt').prop('disabled',false);
+
+            }
+            else{
+
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{{route('admin.workorder.setWoStatus')}}",
+                    data:{
+                        wo_id           : $('#wo-id').val(),
+                        state           : 'waiting',
+                        _token          : '{{csrf_token()}}'
+                    }
+                });
+
+                $('#alert_coil_number').html("<i class='fas fa-check'></i> Number of coil needed: " + result);
+                $('#alert_coil_number').removeClass("alert-warning").addClass("alert-success");
+                $('#smelt-weight').attr('readonly',true);
+                $('#smelt-num').attr('readonly',true);
+                // $('#smelt-area').attr('readonly',true);
+                $('#create-smelt').prop('disabled',true);
+            }
+        }
+    });
 </script>
 @endpush

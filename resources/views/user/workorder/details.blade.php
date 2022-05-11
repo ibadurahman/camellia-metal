@@ -290,32 +290,14 @@
                             <h5 class="mt-5 text-muted">Others</h5>
                             <ul class="list-unstyled">
                                 <li>
-                                    <p href="" class="text-secondary"> Operator: {{$workorder->operator}}</p>
-                                </li>
-                                <li>
-                                    <p href="" class="text-secondary"> Status Production: 
-                                        @if ($workorder->status_prod == 0)
-                                            Not in Process
-                                        @else
-                                            On Process
-                                        @endif
-                                    </p>
-                                </li>
-                                <li>
                                     <p href="" class="text-secondary"> Status WO: 
-                                        @if ($workorder->status_wo == 0)
-                                            Open
-                                        @else
-                                            Closed  
-                                        @endif
+                                        {{$workorder->status_wo}}
                                     </p>
                                 </li>
                                 <li>
                                     <p href="" class="text-secondary"> Machine: {{$workorder->machine->name}}</p>
                                 </li>
-                                <li>
-                                    <p href="" class="text-secondary"> Production Date: {{$workorder->production_date}}</p>
-                                </li>
+                                
                             </ul>
                             <div class="mt-5 mb-3">
                                 <a href="#" class="btn btn-sm btn-primary">Print</a>
@@ -331,7 +313,7 @@
 
 @push('scripts')
 <script>
-    $(function(){'use strict'
+    $(function(){
         $.ajax({
             type: "POST",
             dataType: "json", 
@@ -441,7 +423,7 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                var pieChartCanvas=$('#oee-chart-canvas').get(0).getContext('2d');
+                var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
                 var pieData=    {
                                     labels:['OEE','Waste'],
                                     datasets:[

@@ -13,6 +13,7 @@ use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Oee;
+use App\Models\Supplier;
 
 class DataController extends Controller
 {
@@ -27,36 +28,36 @@ class DataController extends Controller
     }
 
     //Workorder Data Controller
-    public function workorders()
+    public function workordersDraft()
     {
-        $workorders = Workorder::where('status_wo','0')->where('status_prod','0')->orderBy('wo_order_num','ASC');
+        $workorders = Workorder::where('status_wo','draft')->orderBy('wo_order_num','ASC');
         return datatables()->of($workorders)
                 ->addColumn('bb_qty_combine',function(Workorder $model){
                     $combines = $model->bb_qty_pcs . " / " . $model->bb_qty_coil;
                     return $combines;
                 })
                 ->addColumn('fg_size_combine',function(Workorder $model){
-                    $combines = $model->fg_size_1 . " / " . $model->fg_size_2;
+                    $combines = $model->fg_size_1 . " x " . $model->fg_size_2;
                     return $combines;
                 })
                 ->addColumn('tolerance',function(Workorder $model){
-                    $combines = '(+'.$model->tolerance_plus . ", -" . $model->tolerance_minus . ')';
-                    return $combines;
+                    $combines = $model->tolerance_minus;
+                    return round($combines,2);
                 })
-                ->addColumn('status_prod',function(Workorder $model){
-                    $combines = $model->status_prod;
-                    if($combines){
-                        return 'On Process';
-                    }
-                    return 'Waiting';
-                })
-                ->addColumn('status_wo',function(Workorder $model){
-                    $combines = $model->status_wo;
-                    if($combines){
-                        return 'Closed';
-                    }
-                    return 'Open';
-                })
+                // ->addColumn('status_prod',function(Workorder $model){
+                //     $combines = $model->status_prod;
+                //     if($combines){
+                //         return 'On Process';
+                //     }
+                //     return 'Waiting';
+                // })
+                // ->addColumn('status_wo',function(Workorder $model){
+                //     $combines = $model->status_wo;
+                //     if($combines){
+                //         return 'Closed';
+                //     }
+                //     return 'Open';
+                // })
                 ->addColumn('user',function(Workorder $model){
                     return $model->user->name;
                 })
@@ -72,23 +73,96 @@ class DataController extends Controller
                 ->setRowId(function(Workorder $model){
                     return $model->id;
                 })
+                ->setRowClass(function(Workorder $model){
+                    if($model->status_wo == 'draft'){
+                        return 'workorder-row alert-danger';
+                    }
+                    return 'workorder-row';
+                })
+                ->setRowAttr([
+                    'data-toggle'       => 'tooltip',
+                    'data-placement'    => 'top',
+                    'title'             => function(Workorder $model){
+                        if($model->status_wo == 'draft'){
+                            return 'Smelting Number Must Be Input Correctly';
+                        }
+                        return 'Data OK';
+                    }
+                ])
                 ->addIndexColumn()
                 ->toJson();
     }
 
-    public function wo_smeltings(Request $request)
+    //Workorder Data Controller
+    public function workordersWaiting()
     {
-        $smeltings = Smelting::where('workorder_id',$request->wo_id)->get();
-        if(!$smeltings){
-            return;
-        }
-        return $smeltings;
+        $workorders = Workorder::where('status_wo','waiting')->orderBy('wo_order_num','ASC');
+        return datatables()->of($workorders)
+                ->addColumn('bb_qty_combine',function(Workorder $model){
+                    $combines = $model->bb_qty_pcs . " / " . $model->bb_qty_coil;
+                    return $combines;
+                })
+                ->addColumn('fg_size_combine',function(Workorder $model){
+                    $combines = $model->fg_size_1 . " x " . $model->fg_size_2;
+                    return $combines;
+                })
+                ->addColumn('tolerance',function(Workorder $model){
+                    $combines = $model->tolerance_minus;
+                    return round($combines,2);
+                })
+                // ->addColumn('status_prod',function(Workorder $model){
+                //     $combines = $model->status_prod;
+                //     if($combines){
+                //         return 'On Process';
+                //     }
+                //     return 'Waiting';
+                // })
+                // ->addColumn('status_wo',function(Workorder $model){
+                //     $combines = $model->status_wo;
+                //     if($combines){
+                //         return 'Closed';
+                //     }
+                //     return 'Open';
+                // })
+                ->addColumn('user',function(Workorder $model){
+                    return $model->user->name;
+                })
+                ->addColumn('machine',function(Workorder $model){
+                    return $model->machine->name;
+                })
+                ->addColumn('action','admin.workorder.action')
+                ->addColumn('smelting','admin.workorder.smelting')
+                ->rawColumns(['smelting','action'])
+                ->setRowClass(function(){
+                    return 'workorder-row';
+                })
+                ->setRowId(function(Workorder $model){
+                    return $model->id;
+                })
+                ->setRowClass(function(Workorder $model){
+                    if($model->status_wo == 'draft'){
+                        return 'workorder-row alert-danger';
+                    }
+                    return 'workorder-row';
+                })
+                ->setRowAttr([
+                    'data-toggle'       => 'tooltip',
+                    'data-placement'    => 'top',
+                    'title'             => function(Workorder $model){
+                        if($model->status_wo == 'draft'){
+                            return 'Smelting Number Must Be Input Correctly';
+                        }
+                        return 'Data OK';
+                    }
+                ])
+                ->addIndexColumn()
+                ->toJson();
     }
 
     //OnProcess Data Controller
     public function workordersOnProcess()
     {
-        $workorders = Workorder::where('status_prod','1')->orderBy('wo_order_num','ASC');
+        $workorders = Workorder::where('status_wo','on process')->orderBy('wo_order_num','ASC');
         return datatables()->of($workorders)
                 ->addColumn('bb_qty_combine',function(Workorder $model){
                     $combines = $model->bb_qty_pcs . " / " . $model->bb_qty_coil;
@@ -98,22 +172,22 @@ class DataController extends Controller
                     $combines = $model->fg_size_1 . " / " . $model->fg_size_2;
                     return $combines;
                 })
-                ->addColumn('status_prod',function(Workorder $model){
-                    $combines = $model->status_prod;
-                    if($combines){
-                        return 'On Process';
-                    }
-                    return 'Waiting';
-                })
-                ->addColumn('status_wo',function(Workorder $model){
-                    $combines = $model->status_wo;
-                    if($combines){
-                        return 'Closed';
-                    }
-                    return 'Open';
-                })
+                // ->addColumn('status_prod',function(Workorder $model){
+                //     $combines = $model->status_prod;
+                //     if($combines){
+                //         return 'On Process';
+                //     }
+                //     return 'Waiting';
+                // })
+                // ->addColumn('status_wo',function(Workorder $model){
+                //     $combines = $model->status_wo;
+                //     if($combines){
+                //         return 'Closed';
+                //     }
+                //     return 'Open';
+                // })
                 ->addColumn('tolerance',function(Workorder $model){
-                    $combines = '(+'.$model->tolerance_plus . ", -" . $model->tolerance_minus . ')';
+                    $combines = '-' . $model->tolerance_minus;
                     return $combines;
                 })
                 ->addColumn('user',function(Workorder $model){
@@ -132,7 +206,7 @@ class DataController extends Controller
     //OnProcess Data Controller
     public function workordersClosed()
     {
-        $workorders = Workorder::where('status_wo','1')->orderBy('wo_order_num','ASC');
+        $workorders = Workorder::where('status_wo','closed')->orderBy('wo_order_num','ASC');
         return datatables()->of($workorders)
                 ->addColumn('bb_qty_combine',function(Workorder $model){
                     $combines = $model->bb_qty_pcs . " / " . $model->bb_qty_coil;
@@ -142,22 +216,22 @@ class DataController extends Controller
                     $combines = $model->fg_size_1 . " / " . $model->fg_size_2;
                     return $combines;
                 })
-                ->addColumn('status_prod',function(Workorder $model){
-                    $combines = $model->status_prod;
-                    if($combines){
-                        return 'On Process';
-                    }
-                    return 'Waiting';
-                })
-                ->addColumn('status_wo',function(Workorder $model){
-                    $combines = $model->status_wo;
-                    if($combines){
-                        return 'Closed';
-                    }
-                    return 'Open';
-                })
+                // ->addColumn('status_prod',function(Workorder $model){
+                //     $combines = $model->status_prod;
+                //     if($combines){
+                //         return 'On Process';
+                //     }
+                //     return 'Waiting';
+                // })
+                // ->addColumn('status_wo',function(Workorder $model){
+                //     $combines = $model->status_wo;
+                //     if($combines){
+                //         return 'Closed';
+                //     }
+                //     return 'Open';
+                // })
                 ->addColumn('tolerance',function(Workorder $model){
-                    $combines = '(+'.$model->tolerance_plus . ", -" . $model->tolerance_minus . ')';
+                    $combines = '-' . $model->tolerance_minus;
                     return $combines;
                 })
                 ->addColumn('user',function(Workorder $model){
@@ -171,6 +245,38 @@ class DataController extends Controller
                 })
                 ->addIndexColumn()
                 ->toJson();
+    }
+
+    public function suppliers()
+    {
+        $suppliers = Supplier::query();
+        return datatables()->of($suppliers)
+                ->addIndexColumn()
+                ->addColumn('action','admin.supplier.action')
+                ->toJson();
+    }
+
+    public function customers()
+    {
+        $customers = Customer::query();
+        return datatables()->of($customers)
+                ->addIndexColumn()
+                ->addColumn('size',function(Customer $model){
+                    $combines = $model->size_1 . " x " . $model->size_2;
+                    return $combines;
+                })
+                ->addColumn('action','admin.customer.action')
+                ->toJson();
+    }
+
+    // Leburan Data Controller
+    public function wo_smeltings(Request $request)
+    {
+        $smeltings = Smelting::where('workorder_id',$request->wo_id)->orderby('bundle_num','asc')->get();
+        if(!$smeltings){
+            return;
+        }
+        return $smeltings;
     }
 
     //Productions Data Controller
@@ -192,7 +298,7 @@ class DataController extends Controller
     //Smeltings Data Controller
     public function smeltings(Request $request)
     {
-        $smeltings = Smelting::where('workorder_id',$request->wo_id)->get();
+        $smeltings = Smelting::where('workorder_id',$request->wo_id)->orderBy('bundle_num','asc')->get();
         return datatables()->of($smeltings)
                 ->addColumn('wo_number',function(Smelting $model){
                     return $model->workorder->wo_number;

@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserTableSeeder::class);
         $this->call(LineSeeder::class);
         $this->call(MachineSeeder::class);
+
+        \App\Models\Customer::factory(10)->create();
+        \App\Models\Supplier::factory(10)->create();
     }
 }

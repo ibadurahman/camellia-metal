@@ -14,7 +14,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="">WO Number</label>
-                                    <input name="wo_number" type="text" readonly class="form-control @error('wo_number') is-invalid @enderror" placeholder="WO Number" value="{{old('wo_number',$wo_num)}}">
+                                    <input name="wo_number" type="text" class="form-control @error('wo_number') is-invalid @enderror" placeholder="WO Number" value="{{old('wo_number',$wo_num)}}">
                                     @error('wo_number')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
@@ -24,14 +24,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Supplier</label>
-                                    <input name="bb_supplier" type="text" class="form-control @error('bb_supplier') is-invalid @enderror" placeholder="(Bahan Baku) Supplier" value="{{old('bb_supplier')}}">
+                                    <select id="supplier-cmbbx" name="bb_supplier" class="form-control @error('bb_supplier') is-invalid @enderror" value="{{old('bb_supplier')}}">
+                                        <option disabled selected value> -- select an option -- </option>
+                                        @foreach ($suppliers as $supplier)
+                                            <option value="{{$supplier->name}}">{{$supplier->name}}</option>  
+                                        @endforeach
+                                    </select>
                                     @error('bb_supplier')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Grade</label>
-                                    <input name="bb_grade" type="text" class="form-control @error('bb_grade') is-invalid @enderror" placeholder="(Bahan Baku) Grade" value="{{old('bb_grade')}}">
+                                    <input id="supplier-grade" name="bb_grade" type="text" class="form-control @error('bb_grade') is-invalid @enderror" placeholder="(Bahan Baku) Grade" value="{{old('bb_grade')}}">
                                     @error('bb_grade')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
@@ -40,7 +45,7 @@
                                     <label for="">Diameter</label>
                                     <div class="row">
                                         <div class="col-11">
-                                            <input name="bb_diameter" type="text" class="form-control @error('bb_diameter') is-invalid @enderror" placeholder="(Bahan Baku) Diameter" value="{{old('bb_diameter')}}">
+                                            <input id="supplier-diameter" name="bb_diameter" type="text" class="form-control @error('bb_diameter') is-invalid @enderror" placeholder="(Bahan Baku) Diameter" value="{{old('bb_diameter')}}">
                                             @error('bb_diameter')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -54,7 +59,7 @@
                                     <label for="">Qty</label>
                                     <div class="row">
                                         <div class="col-5">
-                                            <input name="bb_qty_pcs" type="text" class="form-control @error('bb_qty_pcs') is-invalid @enderror" placeholder="(Bahan Baku) Qty PCS" value="{{old('bb_qty_pcs')}}">
+                                            <input id="supplier-qty-kg" name="bb_qty_pcs" type="text" class="form-control @error('bb_qty_pcs') is-invalid @enderror" placeholder="(Bahan Baku) Qty PCS" value="{{old('bb_qty_pcs')}}">
                                             @error('bb_qty_pcs')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -63,7 +68,7 @@
                                             <label for="">Kg</label>
                                         </div>
                                         <div class="col-5">
-                                            <input name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="(Bahan Baku) Qty COIL" value="{{old('bb_qty_coil')}}">
+                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="(Bahan Baku) Qty COIL" value="{{old('bb_qty_coil')}}">
                                             @error('bb_qty_coil')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -78,8 +83,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Customer</label>
-                                    <input name="fg_customer" type="text" class="form-control @error('fg_customer') is-invalid @enderror" placeholder="(Finish Good) Customer" value="{{old('fg_customer')}}">
+                                    <select id="customer-cmbbx" name="fg_customer" class="form-control @error('fg_customer') is-invalid @enderror" value="{{old('fg_customer')}}">
+                                        <option disabled selected value> -- select an option -- </option>
+                                        @foreach ($customers as $customer)
+                                            <option value="{{$customer->name}}">{{$customer->name}}</option>  
+                                        @endforeach
+                                    </select>
                                     @error('fg_customer')
+                                        <span class="text-danger help-block">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Standar Kelurusan</label>
+                                    <input id="customer-straight-standard" name="straightness_standard" type="text" class="form-control @error('straightness_standard') is-invalid @enderror" placeholder="Standar Kelurusan" value="{{old('straightness_standard')}}">
+                                    @error('straightness_standard')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -87,7 +104,7 @@
                                     <label for="">Size</label>
                                     <div class="row">
                                         <div class="col-5">
-                                            <input name="fg_size_1" type="text" class="form-control @error('fg_size_1') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_1')}}">
+                                            <input id="customer-size-1" name="fg_size_1" type="text" class="form-control @error('fg_size_1') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_1')}}">
                                             @error('fg_size_1')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -96,7 +113,7 @@
                                             <label class="right" for="">X</label>
                                         </div>
                                         <div class="col-5">
-                                            <input name="fg_size_2" type="text" class="form-control @error('fg_size_2') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_2')}}">
+                                            <input id="customer-size-2" name="fg_size_2" type="text" class="form-control @error('fg_size_2') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_2')}}">
                                             @error('fg_size_2')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -107,44 +124,42 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Tolerance (+)</label>
-                                    <input name="tolerance_plus" type="text" class="form-control @error('tolerance_plus') is-invalid @enderror" placeholder="Tolerance (+)" value="{{old('tolerance_plus')}}">
-                                    @error('tolerance_plus')
-                                        <span class="text-danger help-block">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="">Tolerance (-)</label>
-                                    <input name="tolerance_minus" type="text" class="form-control @error('tolerance_minus') is-invalid @enderror" placeholder="Tolerance (-)" value="{{old('tolerance_minus')}}">
+                                    <input id="customer-tolerance" name="tolerance_minus" type="text" class="form-control @error('tolerance_minus') is-invalid @enderror" placeholder="Tolerance (-)" value="{{old('tolerance_minus')}}">
                                     @error('tolerance_minus')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Reduction Rate</label>
-                                    <input name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="(Finish Good) Reduction Rate" value="{{old('fg_reduction_rate')}}">
+                                    <input id="customer-reduc-rate" name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="(Finish Good) Reduction Rate" value="{{old('fg_reduction_rate')}}">
                                     @error('fg_reduction_rate')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Shape</label>
-                                    <input name="fg_shape" type="text" class="form-control @error('fg_shape') is-invalid @enderror" placeholder="(Finish Good) Shape" value="{{old('fg_shape')}}">
+                                    <select name="fg_shape" id="customer-shape" class="form-control @error('fg_shape') is-invalid @enderror" >
+                                        <option disabled selected value> -- select an option -- </option>
+                                        <option id="shape-round" value="Round">Round</option>
+                                        <option id="shape-square" value="Square">Square</option>  
+                                        <option id="shape-hexagon" value="Hexagon">Hexagon</option>  
+                                    </select>
                                     @error('fg_shape')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Qty</label>
-                                    <input name="fg_qty" type="text" class="form-control @error('fg_qty') is-invalid @enderror" placeholder="(Finish Good) Qty" value="{{old('fg_qty')}}">
-                                    @error('fg_qty')
+                                    <label for="">Kg per Bundle</label>
+                                    <input id="kg-per-bundle" name="fg_qty_kg" type="text" class="form-control @error('fg_qty_kg') is-invalid @enderror" placeholder="(Finish Good) Kg per bundle" value="{{old('fg_qty_kg')}}">
+                                    @error('fg_qty_kg')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Operator</label>
-                                    <input name="operator" type="text" class="form-control @error('operator') is-invalid @enderror" placeholder="(Finish Good) Operator" value="{{old('operator')}}">
-                                    @error('operator')
+                                    <label for="">Pcs per Bundle</label>
+                                    <input id="pcs-per-bundle" name="fg_qty_pcs" type="text" class="form-control @error('fg_qty_pcs') is-invalid @enderror" placeholder="(Finish Good) Pcs per bundle" value="{{old('fg_qty_pcs')}}">
+                                    @error('fg_qty_pcs')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -160,14 +175,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Date and time:</label>
-                                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                        <input name="production_date" type="text" class="form-control datetimepicker-input @error('production_date') is-invalid @enderror" data-target="#reservationdatetime" value="{{old('production_date')}}"/>
-                                        <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                    @error('production_date')
+                                    <label for="">Remarks</label>
+                                    <textarea name="remarks" class="form-control @error('remarks') is-invalid @enderror" placeholder="Catatan" cols="30" rows="10">{{old('remarks')}}</textarea>
+                                    @error('remarks')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -187,13 +197,152 @@
 @endsection
 
 @push('scripts')
-<script>
-    $(function(){
-        $('#reservationdatetime').datetimepicker({ 
-            icons: { time: 'far fa-clock' },
-            format: 'YYYY-MM-DD HH:mm:ss',
-        });
-    });
-</script>
+    <script>
+        $(function(){
+            $('#reservationdatetime').datetimepicker({ 
+                icons: { time: 'far fa-clock' },
+                format: 'YYYY-MM-DD HH:mm:ss',
+            });
+            $('#customer-size-1').on('keyup',function(){
+                recalculate();
+            });
+            $('#supplier-diameter').on('keyup',function(){
+                recalculate();
+            });
+            $('#kg-per-bundle').on('keyup',function(){
+                recalculate();
+            });
+            $('#supplier-cmbbx').on('change',function(){
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{{route('admin.supplier.getSupplierData')}}",
+                    data:{
+                        name:$('#supplier-cmbbx').val(),
+                        _token:'{{csrf_token()}}'
+                    },
+                    success:function(response){
+                        $('#supplier-grade').val(response[0].grade);
+                        $('#supplier-diameter').val(response[0].diameter);
+                        $('#supplier-qty-kg').val(response[0].qty_kg);
+                        $('#supplier-qty-coil').val(response[0].qty_coil);
+                        recalculate();
+                    }
+                });
+            });
+            $('#customer-cmbbx').on('change',function(){
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{{route('admin.customer.getCustomerData')}}",
+                    data:{
+                        name:$('#customer-cmbbx').val(),
+                        _token:'{{csrf_token()}}'
+                    },
+                    success:function(response){
+                        $('#customer-straight-standard').val(response[0].straightness_standard);
+                        $('#customer-size-1').val(response[0].size_1);
+                        $('#customer-size-2').val(response[0].size_2);
+                        
+                        if(response[0].shape == "Round")
+                        {
+                            $('#shape-round').attr('selected',true)
+                            $('#shape-square').attr('selected',false)
+                            $('#shape-hexagon').attr('selected',false)
+                        }
+                        if(response[0].shape == "Square")
+                        {
+                            $('#shape-round').attr('selected',false)
+                            $('#shape-square').attr('selected',true)
+                            $('#shape-hexagon').attr('selected',false)
+                        }
+                        if(response[0].shape == "Hexagon")
+                        {
+                            $('#shape-round').attr('selected',false)
+                            $('#shape-square').attr('selected',false)
+                            $('#shape-hexagon').attr('selected',true)
+                        }
+                        recalculate();
+                    }
+                });
+            });
 
+            function recalculate()
+            {
+                $('#customer-tolerance').val("-" + addTolerance($('#customer-size-1').val()));
+                $('#customer-reduc-rate').val(calculateReducRate($('#supplier-diameter').val(),$('#customer-size-1').val()));
+                $('#pcs-per-bundle').val(calculatePcsPerBundle($('#kg-per-bundle').val(),$('#customer-shape').val()));
+            }
+            function calculateReducRate(dia_1=0,dia_2=0)
+            {
+                var result = (1-((dia_2*dia_2)/(dia_1*dia_1)))*100;
+                return result.toFixed(2);
+            }
+            function calculatePcsPerBundle(weightVal=0,shape=null)
+            {
+                var diameter    = $('#customer-size-1').val();
+                var panjang     = $('#customer-size-2').val();
+                var result      = 0;
+
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{{route('admin.workorder.calculatePcsPerBundle')}}",
+                    data:{
+                        shape:shape,
+                        _token:"{{csrf_token()}}"
+                    },
+                    success:function(response){
+                        result = weightVal/diameter/diameter/panjang/response*1000;
+                        $('#pcs-per-bundle').val(result.toFixed(2));
+                    }
+                })
+            }
+            function addTolerance(diameter=0)
+            {
+                var shape = $('#customer-shape').val();
+                if(diameter>3.01 && diameter < 6.00)
+                {
+                    if(shape == "Round")
+                    {
+                        return 0.03;
+                    }
+                    return 0.75;
+                }
+                if(diameter>6.01 && diameter < 10.00)
+                {
+                    if(shape == "Round")
+                    {
+                        return 0.03;
+                    }
+                    return 0.90;
+                }
+                if(diameter>10.01 && diameter < 18.00)
+                {
+                    if(shape == "Round")
+                    {
+                        return 0.04;
+                    }
+                    return 1.1;
+                }
+                if(diameter>18.01 && diameter < 30.00)
+                {
+                    if(shape == "Round")
+                    {
+                        return 0.05;
+                    }
+                    return 1.3;
+                }
+                if(diameter>30.01 && diameter < 40.00)
+                {
+                    if(shape == "Round")
+                    {
+                        return 0.06;
+                    }
+                    return 1.6;
+                }
+            }
+        });
+
+    </script>
 @endpush

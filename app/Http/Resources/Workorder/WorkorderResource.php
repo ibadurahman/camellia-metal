@@ -15,14 +15,14 @@ class WorkorderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $status_prod = "Waiting";
-        if($this->status_prod == 1){
-            $status_prod = "On Process";
-        }
-        $status_wo = "Open";
-        if($this->status_wo == 1){
-            $status_wo = "Closed";
-        }
+        // $status_prod = "Waiting";
+        // if($this->status_prod == 1){
+        //     $status_prod = "On Process";
+        // }
+        // $status_wo = "Open";
+        // if($this->status_wo == 1){
+        //     $status_wo = "Closed";
+        // }
         $smeltingData   = Smelting::where('workorder_id',$this->id)->get();
         $smelting       = [];
         foreach($smeltingData as $smelt){
@@ -49,8 +49,8 @@ class WorkorderResource extends JsonResource
             'fg_qty'            =>$this->fg_qty,
             'wo_order_num'      =>$this->wo_order_num,
             'operator'          =>$this->operator,
-            'status_prod'       =>$status_prod,
-            'status_wo'         =>$status_wo,
+            // 'status_prod'       =>$status_prod,
+            'status_wo'         =>$this->status_wo,
             'machine'           =>$this->machine->name,
             'production_date'   =>$this->production_date,
             'user'              =>$this->user->name,

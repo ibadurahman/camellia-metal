@@ -28,7 +28,7 @@ class SmeltingRequest extends FormRequest
             'wo_id'             =>['required'],
             'weight'            =>['required'],
             'smelting_num'      =>['required'],
-            'area'              =>['required'],
+            // 'area'              =>['required'],
         ];
     }
 

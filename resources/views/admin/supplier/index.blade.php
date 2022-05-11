@@ -9,10 +9,10 @@
                     @include('admin.templates.partials.alerts')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">User Account List</h3>
+                            <h3 class="card-title">Supplier List</h3>
                         </div>
                         <div class="card-body">
-                            <a href="{{route('admin.user.create')}}" class="btn btn-primary">Add Account</a>         
+                            <a href="{{route('admin.supplier.create')}}" class="btn btn-primary">Add Supplier</a>         
                         </div>
                         <div class="card-body">
                             <table id="dataTable" class="table table-bordered table-hover">
@@ -20,7 +20,10 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>E-Mail</th>
+                                        <th>Grade</th>
+                                        <th>Diameter (mm)</th>
+                                        <th>Qty (Kg)</th>
+                                        <th>Qty (Coil)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -45,11 +48,14 @@
       $('#dataTable').DataTable({
         processing:true,
         serverSide:true,
-        ajax:'{{route('admin.user.data')}}',
+        ajax:'{{route('admin.supplier.data')}}',
         columns:[
             {data:'DT_RowIndex',orderable:false, searchable:false},
             {data:'name'},
-            {data:'email'},
+            {data:'grade'},
+            {data:'diameter'},
+            {data:'qty_kg'},
+            {data:'qty_coil'},
             {data:'action'}
         ],
         "paging": true,

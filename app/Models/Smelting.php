@@ -13,7 +13,7 @@ class Smelting extends Model
         'bundle_num',
         'weight',
         'smelting_num',
-        'area',
+        // 'area',
     ];
 
     public function workorder(){

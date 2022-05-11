@@ -26,6 +26,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="kanban overlay">
+                        <i class="fas fa-sync-alt fa-spin"></i>
+                    </div>
                 </div>       
             </div>
             <div class="col-lg-3 col-6">
@@ -38,6 +41,9 @@
                     </div>
                     <div class="icon">
                         <i class="ion ion-speedometer"></i>
+                    </div>
+                    <div class="speed overlay">
+                        <i class="fas fa-sync-alt fa-spin"></i>
                     </div>
                 </div>
             </div>
@@ -52,6 +58,9 @@
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <div class="counter overlay">
+                        <i class="fas fa-sync-alt fa-spin"></i>
                     </div>
                 </div>
             </div>
@@ -78,6 +87,9 @@
                         <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
                     </div>
+                    <div class="speed-chart overlay">
+                        <i class="fas fa-sync-alt fa-spin"></i>
+                    </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -87,12 +99,34 @@
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->    
+    <!-- /.content -->
+
+     <!-- Theme style -->
+    {{-- <link rel="stylesheet" href="{{asset('dist/css/loader.css')}}">
+    <div class="loader-cover">
+        <div class="loader-wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <span>Loading</span>
+        </div> 
+    </div> --}}
+    
+     
 @endsection
 
 @push('scripts')
+
 <script>
     window.setInterval(() => {
+        $('.kanban').show();
+        $('.speed').show();
+        $('.counter').show();
+        $('.speed-chart').show();
+
         $.ajax({
             method:'GET',
             url:'{{route('realtime.ajaxRequestAll')}}',
@@ -143,6 +177,8 @@
                     data: areaChartData,
                     options: areaChartOptions
                 })
+
+                $('.speed-chart').hide();
             }
         });
         
@@ -152,6 +188,7 @@
                 dataType:'json',
             success:function(response){
                 document.getElementById('speedVal').innerHTML = response.speed +'<sup style="font-size: 20px">MPM</sup>';
+                $('.speed').hide();
             }
         });
         
@@ -162,6 +199,7 @@
                 dataType:'json',
             success:function(response){
                 document.getElementById('counterVal').innerHTML = response.counter +'<sup style="font-size: 20px">MPM</sup>';
+                $('.counter').hide();
             }
         });
            
@@ -209,7 +247,10 @@
                             '</div>'+
                         '</div>'+
                     '</div>'
-                )
+                );
+            },
+            error:function(response){
+                $('.kanban').hide();
             }
         });
         
