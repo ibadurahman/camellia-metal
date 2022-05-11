@@ -44,7 +44,7 @@ class OeeApiController extends Controller
         //
         $data = $request->all();
 
-        $workorderId = Workorder::select('id')->where('id',$data['workorder_id'])->first();
+        $workorderId = Workorder::select('id')->where('wo_number',$data['workorder_id'])->first();
         if(!$workorderId)
         {
             return response()->json([

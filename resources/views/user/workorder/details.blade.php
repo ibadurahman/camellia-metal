@@ -441,7 +441,7 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                var pieChartCanvas=document.getElementById('oee-chart-canvas').getContext('2d');
+                var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
                 var pieData=    {
                                     labels:['OEE','Waste'],
                                     datasets:[
