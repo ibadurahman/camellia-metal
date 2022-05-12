@@ -18,7 +18,7 @@ class Production extends Model
         'workorder_id',
         'bundle_num',
         'dies_num',
-        'area',
+        // 'area',
         'diameter_ujung',
         'diameter_tengah',
         'diameter_ekor',

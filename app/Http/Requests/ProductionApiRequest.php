@@ -30,7 +30,7 @@ class ProductionApiRequest extends FormRequest
             'workorder_id'      =>['required'],
             'bundle_num'        =>['required'],
             'dies_num'          =>['required'],
-            'area'              =>['required'],
+            // 'area'              =>['required'],
             'diameter_ujung'    =>['required'],
             'diameter_tengah'   =>['required'],
             'diameter_ekor'     =>['required'],

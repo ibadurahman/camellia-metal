@@ -18,7 +18,7 @@ class CreateProductionsTable extends Migration
             $table->unsignedBigInteger('workorder_id');
             $table->bigInteger('bundle_num');
             $table->string('dies_num');
-            $table->string('area');
+            // $table->string('area');
             $table->bigInteger('diameter_ujung');
             $table->bigInteger('diameter_tengah');
             $table->bigInteger('diameter_ekor');

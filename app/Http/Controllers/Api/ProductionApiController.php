@@ -87,6 +87,7 @@ class ProductionApiController extends Controller
         if($smeltingNum == $productionNum && $oeeData != null){
             Workorder::where('id',$workorderId->id)->update(['status_wo'=>'closed']);
         }
+
         
         return response()->json([
             'messages'=>'New data submited successfully'

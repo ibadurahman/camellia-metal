@@ -80,9 +80,6 @@
                                                                     <b>Dies Number</b> <p class="float-right">{{$prod->dies_num}}</p>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Area</b> <p class="float-right">{{$prod->area}}</p>
-                                                                </li>
-                                                                <li class="list-group-item">
                                                                     <b>Diameter Ujung</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
                                                                 </li>
                                                                 <li class="list-group-item">

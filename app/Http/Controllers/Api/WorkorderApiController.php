@@ -17,7 +17,7 @@ class WorkorderApiController extends Controller
     public function index()
     {
         //
-        $data = Workorder::orderBy('wo_order_num','ASC')->limit(3)->get();
+        $data = Workorder::where('status_wo','waiting')->orderBy('wo_order_num','ASC')->limit(3)->get();
 
         if(is_null($data))
         {
