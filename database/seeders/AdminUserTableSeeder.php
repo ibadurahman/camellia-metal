@@ -18,7 +18,7 @@ class AdminUserTableSeeder extends Seeder
         //
         $userAdmin = User::create([
             'name'  => 'Admin Camelia Metal',
-            'email' => 'admin@camelia.com',
+            'employeeId' => '000000000001',
             'password'  => bcrypt('12345678'),
             'api_token' => Str::random(80),
             'email_verified_at' => now()
@@ -26,14 +26,14 @@ class AdminUserTableSeeder extends Seeder
 
         $userAdmin->assignRole('admin');
 
-        $userAdmin = User::create([
+        $user = User::create([
             'name'  => 'User Camelia Metal',
-            'email' => 'user@camelia.com',
+            'employeeId' => '000000000002',
             'password'  => bcrypt('12345678'),
             'api_token' => Str::random(80),
             'email_verified_at' => now()
         ]);
 
-        $userAdmin->assignRole('user');
+        $user->assignRole('user');
     }
 }

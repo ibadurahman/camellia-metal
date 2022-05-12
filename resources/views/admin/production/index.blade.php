@@ -30,7 +30,7 @@
                                         <th>Bundle Number</th>
                                         <th>No. Leburan</th>
                                         <th>Dies Number</th>
-                                        <th>Area</th>
+                                        {{-- <th>Area</th> --}}
                                         <th>Diameter Ujung</th>
                                         <th>Diameter Tengah</th>
                                         <th>Diameter Ekor</th>
@@ -71,7 +71,7 @@
             {data:'bundle_num'},
             {data:'smelting_num'},
             {data:'dies_num'},
-            {data:'area'},
+            // {data:'area'},
             {data:'diameter_ujung'},
             {data:'diameter_tengah'},
             {data:'diameter_ekor'},

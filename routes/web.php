@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Monitoring;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'RealtimeController@index')
 ->middleware(['verified'])->name('home');
 Route::get('/ajaxRequest', 'RealtimeController@ajaxRequest')
@@ -46,6 +46,7 @@ Route::get('/workorder/dataonprocess', 'Admin\DataController@workordersOnProcess
 ->middleware(['verified'])->name('workorder.dataonprocess');
 Route::get('/workorder/dataclosed', 'Admin\DataController@workordersClosed')
 ->middleware(['verified'])->name('workorder.dataclosed');
+
 
 
 

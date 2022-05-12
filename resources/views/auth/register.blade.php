@@ -24,13 +24,13 @@
                                     </div>
                                 </div>
                             </div>
-                            @error('email')
+                            @error('employeeId')
                                 <span class="text-danger">
                                     {{$message}}
                                 </span>
                             @enderror
                             <div class="input-group mb-3">
-                                <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
+                                <input name="employeeId" type="text" class="form-control" placeholder="Employee ID" value="{{old('employeeId')}}">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>

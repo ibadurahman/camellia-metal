@@ -107,6 +107,7 @@ class WorkorderController extends Controller
                 $oee->dt_sambung_bahan,
                 $oee->dt_setting_awal,
                 $oee->dt_selesai_satu_bundle,
+                $oee->dt_cleaning_area_mesin,
                 $oee->dt_istirahat
             ],200);
         }

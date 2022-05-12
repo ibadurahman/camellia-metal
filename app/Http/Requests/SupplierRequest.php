@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Supplier;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,8 +28,7 @@ class SupplierRequest extends FormRequest
     {
         $rule_supplier_unique = Rule::unique('suppliers','name');
         if($this->method() !== 'POST'){
-            $supplier_id = Supplier::where('name',$this->request->get('name'))->first();
-            $rule_supplier_unique->ignore($supplier_id->id);
+            $rule_supplier_unique->ignore(Request::segment(3));
         }
         
         return [

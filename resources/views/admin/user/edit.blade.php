@@ -21,9 +21,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">email</label>
-                                    <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="email" value="{{old('email') ?? $user->email}}">
-                                    @error('email')
+                                    <label for="">Employee Id</label>
+                                    <input name="employeeId" type="text" class="form-control @error('employeeId') is-invalid @enderror" placeholder="email" value="{{old('employeeId') ?? $user->employeeId}}">
+                                    @error('employeeId')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>

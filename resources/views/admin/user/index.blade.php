@@ -20,7 +20,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>E-Mail</th>
+                                        <th>Employee ID</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -49,7 +49,7 @@
         columns:[
             {data:'DT_RowIndex',orderable:false, searchable:false},
             {data:'name'},
-            {data:'email'},
+            {data:'employeeId'},
             {data:'action'}
         ],
         "paging": true,
