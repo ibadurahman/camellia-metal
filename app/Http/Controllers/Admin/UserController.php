@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -40,18 +42,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
         // ddd($request->only('name','email'));
-        $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required'
-        ]);
-
         $user = User::create([
             'name'=>$request->name,
-            'email'=>$request->email,
+            'employeeId'=>$request->employeeId,
             'password'=>bcrypt('12345678')
         ]);
 
@@ -92,15 +89,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         //
-        $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required'
-        ]);
-        
-        $user->update($request->only(['name','email']));
+        $user->update($request->only(['name','employeeId']));
 
         return redirect()->route('admin.user.index')->with('success','Data Updated Successfully');
     }

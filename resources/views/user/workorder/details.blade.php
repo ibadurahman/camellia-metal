@@ -79,9 +79,9 @@
                                                                 <li class="list-group-item">
                                                                     <b>Dies Number</b> <p class="float-right">{{$prod->dies_num}}</p>
                                                                 </li>
-                                                                <li class="list-group-item">
+                                                                {{-- <li class="list-group-item">
                                                                     <b>Area</b> <p class="float-right">{{$prod->area}}</p>
-                                                                </li>
+                                                                </li> --}}
                                                                 <li class="list-group-item">
                                                                     <b>Diameter Ujung</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
                                                                 </li>
@@ -167,7 +167,9 @@
                                                     <li class="list-group-item">
                                                         <b>Cleaning Area Mesin</b> <p class="float-right">{{$oee->dt_cleaning_area_mesin}} min</p>
                                                     </li>
-
+                                                    <li class="list-group-item">
+                                                        <b>Istirahat</b> <p class="float-right">{{$oee->dt_istirahat}} min</p>
+                                                    </li>
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Waste Downtime
                                                     </div>
@@ -221,9 +223,6 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <b>Mesin Trouble Maintenance</b> <p class="float-right">{{$oee->dt_mesin_trouble_maintenance}} min</p>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Istirahat</b> <p class="float-right">{{$oee->dt_istirahat}} min</p>
                                                     </li>
                                                 </ul>
                                             @endif
@@ -324,6 +323,7 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
+                console.log(response);
                 var salesChartCanvas=document.getElementById('management-chart-canvas').getContext('2d');
                 var salesChartData= {
                                 labels:[
