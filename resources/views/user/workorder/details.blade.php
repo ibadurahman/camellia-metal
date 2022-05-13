@@ -79,9 +79,12 @@
                                                                 <li class="list-group-item">
                                                                     <b>Dies Number</b> <p class="float-right">{{$prod->dies_num}}</p>
                                                                 </li>
+<<<<<<< HEAD
+=======
                                                                 {{-- <li class="list-group-item">
                                                                     <b>Area</b> <p class="float-right">{{$prod->area}}</p>
                                                                 </li> --}}
+>>>>>>> d800324cb136df59406154c0c79ce5fb859d7f23
                                                                 <li class="list-group-item">
                                                                     <b>Diameter Ujung</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
                                                                 </li>
@@ -277,6 +280,9 @@
                                     <p href="" class="text-secondary"> Size: {{$workorder->fg_size_1}} mm X {{$workorder->fg_size_2}} mm</p>
                                 </li>
                                 <li>
+                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} %</p>
+                                </li>
+                                <li>
                                     <p href="" class="text-secondary"> Reduction Rate: {{$workorder->fg_reduction_rate}} %</p>
                                 </li>
                                 <li>
@@ -299,7 +305,7 @@
                                 
                             </ul>
                             <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-sm btn-primary">Print</a>
+                                <button id="print-label" class="btn btn-sm btn-primary">Print Label</button>
                             </div>
                         </div>
                     </div>
@@ -316,14 +322,13 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getDowntime')}}',
+            url: "{{route('workorder.getDowntime')}}",
             data: {
                 workorder_id:'{{$workorder->id}}}',
                 data:'management_time',
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                console.log(response);
                 var salesChartCanvas=document.getElementById('management-chart-canvas').getContext('2d');
                 var salesChartData= {
                                 labels:[
@@ -364,7 +369,7 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getDowntime')}}',
+            url: "{{route('workorder.getDowntime')}}",
             data: {
                 workorder_id:'{{$workorder->id}}}',
                 data:'downtime',
@@ -417,7 +422,7 @@
         $.ajax({
             type: "POST",
             dataType: "json", 
-            url: '{{route('workorder.getOee')}}',
+            url: "{{route('workorder.getOee')}}",
             data: {
                 workorder_id:'{{$workorder->id}}',
                 _token: '{{csrf_token()}}'
@@ -428,7 +433,8 @@
                                     labels:['OEE','Waste'],
                                     datasets:[
                                                 {
-                                                    data:[response[0],100-response[0]],
+                                                    data:[80,100],
+                                                    // data:[response[0],100-response[0]],
                                                     backgroundColor:['#00a65a','#f56954']
                                                 }
                                             ]
@@ -440,6 +446,11 @@
                                 }
                 var pieChart=new Chart(pieChartCanvas,{type:'doughnut',data:pieData,options:pieOptions})
             }
+        });
+
+        $('#print-label').on('click',function(){
+            event.preventDefault();
+            window.open("{{url('/report/'.$workorder->id.'/printToPdf')}}");
         });
     })
 </script>
