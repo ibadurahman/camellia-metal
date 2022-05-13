@@ -280,6 +280,9 @@
                                     <p href="" class="text-secondary"> Size: {{$workorder->fg_size_1}} mm X {{$workorder->fg_size_2}} mm</p>
                                 </li>
                                 <li>
+                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} %</p>
+                                </li>
+                                <li>
                                     <p href="" class="text-secondary"> Reduction Rate: {{$workorder->fg_reduction_rate}} %</p>
                                 </li>
                                 <li>
@@ -302,7 +305,7 @@
                                 
                             </ul>
                             <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-sm btn-primary">Print</a>
+                                <button id="print-label" class="btn btn-sm btn-primary">Print Label</button>
                             </div>
                         </div>
                     </div>
@@ -326,7 +329,6 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                console.log(response);
                 var salesChartCanvas=document.getElementById('management-chart-canvas').getContext('2d');
                 var salesChartData= {
                                 labels:[
@@ -444,6 +446,11 @@
                                 }
                 var pieChart=new Chart(pieChartCanvas,{type:'doughnut',data:pieData,options:pieOptions})
             }
+        });
+
+        $('#print-label').on('click',function(){
+            event.preventDefault();
+            window.open("{{url('/report/'.$workorder->id.'/printToPdf')}}");
         });
     })
 </script>

@@ -40,7 +40,7 @@ class CreateNewUser implements CreatesNewUsers
             'api_token' => Str::random(80),
             'email_verified_at' => now()
         ]);
-        
+
         $user->assignRole('user');
 
         return $user;
