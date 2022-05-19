@@ -47,6 +47,7 @@ Route::get('/workorder/dataonprocess', 'Admin\DataController@workordersOnProcess
 Route::get('/workorder/dataclosed', 'Admin\DataController@workordersClosed')
 ->middleware(['verified'])->name('workorder.dataclosed');
 
+
 Route::get('/report/{wo_id}/printToPdf', 'ReportController@displayToPdf')
 ->middleware(['verified']);
 Route::get('/report/{wo_id}/printPage', 'ReportController@printPage')

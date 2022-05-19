@@ -9,6 +9,11 @@ use App\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|office-admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *

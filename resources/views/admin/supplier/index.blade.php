@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 
 @section('content')
     <!-- Main content -->
@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    @include('admin.templates.partials.alerts')
+                    @include('templates.partials.alerts')
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Supplier List</h3>

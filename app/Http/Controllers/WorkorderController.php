@@ -27,7 +27,24 @@ class WorkorderController extends Controller
     public function ajaxRequestAll(Request $request)
     {
         $workorder = Workorder::query();
+        
         return datatables()->of($workorder)
+                ->filter(function($query) use ($request){
+                    if($request->report_date_1 != '')
+                    {
+                        $query->where('created_at', '>=', "$request->report_date_1");
+                    }
+
+                    if($request->report_date_2 != '')
+                    {
+                        $query->where('created_at', '<=', "$request->report_date_2");
+                    }
+
+                    if($request->wo_number != '')
+                    {
+                        $query->where('wo_number' , 'like', '%'.$request->wo_number.'%');
+                    }
+                })
                 ->addColumn('wo_number',function(Workorder $model){
                     return $model->wo_number;
                 })

@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 
 @section('content')
     <!-- Main content -->
@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    @include('admin.templates.partials.alerts')
+                    @include('templates.partials.alerts')
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Draft</h3>
@@ -108,16 +108,16 @@
                                         <th>WO Number</th>
                                         <th>BB Supplier</th>
                                         <th>BB Grade</th>
-                                        <th>BB Diameter</th>
-                                        <th>BB Qty</th>
+                                        <th>BB Diameter (mm)</th>
+                                        <th>BB Qty (Kg / Coil)</th>
                                         <th>FG Customer</th>
-                                        <th>FG Straightness Std</th>
-                                        <th>FG Size</th>
-                                        <th>FG Tolerance</th>
-                                        <th>FG Reduction Rate</th>
+                                        <th>FG Straightness Std (mm)</th>
+                                        <th>FG Size (mm x mm)</th>
+                                        <th>FG Tolerance (mm)</th>
+                                        <th>FG Reduction Rate (%)</th>
                                         <th>FG Shape</th>
-                                        <th>FG Kg per bundle</th>
-                                        <th>FG Pcs per bundle</th>
+                                        <th>FG Kg per bundle (Kg)</th>
+                                        <th>FG Pcs per bundle (Pcs)</th>
                                         {{-- <th>Production Status</th> --}}
                                         <th>Workorder Status</th>
                                         <th>Machine</th>

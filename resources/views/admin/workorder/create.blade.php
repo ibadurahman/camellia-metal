@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -25,7 +25,7 @@
                                 <div class="form-group">
                                     <label for="">Supplier</label>
                                     <select id="supplier-cmbbx" name="bb_supplier" class="form-control @error('bb_supplier') is-invalid @enderror" value="{{old('bb_supplier')}}">
-                                        <option disabled selected value> -- select an option -- </option>
+                                        <option disabled selected value> -- select supplier -- </option>
                                         @foreach ($suppliers as $supplier)
                                             <option value="{{$supplier->name}}">{{$supplier->name}}</option>  
                                         @endforeach
@@ -36,30 +36,23 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Grade</label>
-                                    <input id="supplier-grade" name="bb_grade" type="text" class="form-control @error('bb_grade') is-invalid @enderror" placeholder="(Bahan Baku) Grade" value="{{old('bb_grade')}}">
+                                    <input id="supplier-grade" name="bb_grade" type="text" class="form-control @error('bb_grade') is-invalid @enderror" placeholder="Grade" value="{{old('bb_grade')}}">
                                     @error('bb_grade')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Diameter</label>
-                                    <div class="row">
-                                        <div class="col-11">
-                                            <input id="supplier-diameter" name="bb_diameter" type="text" class="form-control @error('bb_diameter') is-invalid @enderror" placeholder="(Bahan Baku) Diameter" value="{{old('bb_diameter')}}">
-                                            @error('bb_diameter')
-                                                <span class="text-danger help-block">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-1">
-                                            <label for="">mm</label>
-                                        </div>
-                                    </div>
+                                    <label for="">Diameter (mm)</label>
+                                    <input id="supplier-diameter" name="bb_diameter" type="text" class="form-control @error('bb_diameter') is-invalid @enderror" placeholder="Diameter" value="{{old('bb_diameter')}}">
+                                    @error('bb_diameter')
+                                        <span class="text-danger help-block">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Qty</label>
+                                    <label for="">Quantity (Kg / Coil)</label>
                                     <div class="row">
                                         <div class="col-5">
-                                            <input id="supplier-qty-kg" name="bb_qty_pcs" type="text" class="form-control @error('bb_qty_pcs') is-invalid @enderror" placeholder="(Bahan Baku) Qty PCS" value="{{old('bb_qty_pcs')}}">
+                                            <input id="supplier-qty-kg" name="bb_qty_pcs" type="text" class="form-control @error('bb_qty_pcs') is-invalid @enderror" placeholder="Qty (Kg)" value="{{old('bb_qty_pcs')}}">
                                             @error('bb_qty_pcs')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -68,7 +61,7 @@
                                             <label for="">Kg</label>
                                         </div>
                                         <div class="col-5">
-                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="(Bahan Baku) Qty COIL" value="{{old('bb_qty_coil')}}">
+                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="Qty (Coil)" value="{{old('bb_qty_coil')}}">
                                             @error('bb_qty_coil')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -84,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="">Customer</label>
                                     <select id="customer-cmbbx" name="fg_customer" class="form-control @error('fg_customer') is-invalid @enderror" value="{{old('fg_customer')}}">
-                                        <option disabled selected value> -- select an option -- </option>
+                                        <option disabled selected value> -- select customer -- </option>
                                         @foreach ($customers as $customer)
                                             <option value="{{$customer->name}}">{{$customer->name}}</option>  
                                         @endforeach
@@ -94,17 +87,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Standar Kelurusan</label>
-                                    <input id="customer-straight-standard" name="straightness_standard" type="text" class="form-control @error('straightness_standard') is-invalid @enderror" placeholder="Standar Kelurusan" value="{{old('straightness_standard')}}">
+                                    <label for="">Standar Kelurusan (mm)</label>
+                                    <input id="customer-straight-standard" name="straightness_standard" type="text" class="form-control @error('straightness_standard') is-invalid @enderror" placeholder="Standar Kelurusan (mm)" value="{{old('straightness_standard')}}">
                                     @error('straightness_standard')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Size</label>
+                                    <label for="">Size (mm x mm)</label>
                                     <div class="row">
                                         <div class="col-5">
-                                            <input id="customer-size-1" name="fg_size_1" type="text" class="form-control @error('fg_size_1') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_1')}}">
+                                            <input id="customer-size-1" name="fg_size_1" type="text" class="form-control @error('fg_size_1') is-invalid @enderror" placeholder="Diameter (mm)" value="{{old('fg_size_1')}}">
                                             @error('fg_size_1')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -113,7 +106,7 @@
                                             <label class="right" for="">X</label>
                                         </div>
                                         <div class="col-5">
-                                            <input id="customer-size-2" name="fg_size_2" type="text" class="form-control @error('fg_size_2') is-invalid @enderror" placeholder="(Finish Good) Size" value="{{old('fg_size_2')}}">
+                                            <input id="customer-size-2" name="fg_size_2" type="text" class="form-control @error('fg_size_2') is-invalid @enderror" placeholder="Length (mm)" value="{{old('fg_size_2')}}">
                                             @error('fg_size_2')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
@@ -124,15 +117,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Tolerance (-)</label>
-                                    <input id="customer-tolerance" name="tolerance_minus" type="text" class="form-control @error('tolerance_minus') is-invalid @enderror" placeholder="Tolerance (-)" value="{{old('tolerance_minus')}}">
+                                    <label for="">Tolerance (-mm) </label>
+                                    <input id="customer-tolerance" name="tolerance_minus" type="text" class="form-control @error('tolerance_minus') is-invalid @enderror" placeholder="Tolerance (-mm)" value="{{old('tolerance_minus')}}">
                                     @error('tolerance_minus')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Reduction Rate</label>
-                                    <input id="customer-reduc-rate" name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="(Finish Good) Reduction Rate" value="{{old('fg_reduction_rate')}}">
+                                    <label for="">Reduction Rate (mm)</label>
+                                    <input id="customer-reduc-rate" name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="Reduction Rate (%)" value="{{old('fg_reduction_rate')}}">
                                     @error('fg_reduction_rate')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
@@ -140,7 +133,7 @@
                                 <div class="form-group">
                                     <label for="">Shape</label>
                                     <select name="fg_shape" id="customer-shape" class="form-control @error('fg_shape') is-invalid @enderror" >
-                                        <option disabled selected value> -- select an option -- </option>
+                                        <option disabled selected value> -- select shape -- </option>
                                         <option id="shape-round" value="Round">Round</option>
                                         <option id="shape-square" value="Square">Square</option>  
                                         <option id="shape-hexagon" value="Hexagon">Hexagon</option>  
@@ -150,15 +143,15 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Kg per Bundle</label>
-                                    <input id="kg-per-bundle" name="fg_qty_kg" type="text" class="form-control @error('fg_qty_kg') is-invalid @enderror" placeholder="(Finish Good) Kg per bundle" value="{{old('fg_qty_kg')}}">
+                                    <label for="">Quantity per bundle (Kg)</label>
+                                    <input id="kg-per-bundle" name="fg_qty_kg" type="text" class="form-control @error('fg_qty_kg') is-invalid @enderror" placeholder="Qty per bundle (Kg)" value="{{old('fg_qty_kg')}}">
                                     @error('fg_qty_kg')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Pcs per Bundle</label>
-                                    <input id="pcs-per-bundle" name="fg_qty_pcs" type="text" class="form-control @error('fg_qty_pcs') is-invalid @enderror" placeholder="(Finish Good) Pcs per bundle" value="{{old('fg_qty_pcs')}}">
+                                    <label for="">Quantity per Bundle (Pcs)</label>
+                                    <input id="pcs-per-bundle" name="fg_qty_pcs" type="text" class="form-control @error('fg_qty_pcs') is-invalid @enderror" placeholder="Qty per bundle (Pcs)" value="{{old('fg_qty_pcs')}}">
                                     @error('fg_qty_pcs')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror

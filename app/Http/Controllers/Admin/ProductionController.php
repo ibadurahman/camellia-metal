@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ProductionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|office-admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -20,14 +20,14 @@ class DailyReportController extends Controller
         ]);
     }
 
-    //Daily Report Data Controller
-    public function ajaxRequestAll(Request $request)
-    {
-        $dailyReport = DailyReport::query();
-        return datatables()->of($dailyReport)
-                ->addIndexColumn()
-                ->toJson();
-    }
+    // //Daily Report Data Controller
+    // public function ajaxRequestAll(Request $request)
+    // {
+    //     $dailyReport = DailyReport::query();
+    //     return datatables()->of($dailyReport)
+    //             ->addIndexColumn()
+    //             ->toJson();
+    // }
 
     public function getCustomFilterData(Request $request)
     {

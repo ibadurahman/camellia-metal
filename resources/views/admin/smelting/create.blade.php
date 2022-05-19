@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -25,8 +25,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Weight</label>
-                                    <input id="smelt-weight" name="weight" type="text" class="form-control @error('weight') is-invalid @enderror" placeholder="Weight" value="{{old('weight')}}">
+                                    <label for="">Weight (Kg)</label>
+                                    <input id="smelt-weight" name="weight" type="text" class="form-control @error('weight') is-invalid @enderror" placeholder="Weight (Kg)" value="{{old('weight')}}">
                                     @error('weight')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
@@ -70,7 +70,7 @@
                                     <tr>
                                         <th>WO Number</th>
                                         <th>No. Bundle</th>
-                                        <th>Weight</th>
+                                        <th>Weight (Kg)</th>
                                         <th>No. Leburan</th>
                                         {{-- <th>Area</th> --}}
                                         <th>Action</th>

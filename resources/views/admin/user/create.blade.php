@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -23,6 +23,18 @@
                                     <label for="">Email</label>
                                     <input name="employeeId" type="text" class="form-control @error('employeeId') is-invalid @enderror" placeholder="Employee Id" value="{{old('employeeId')}}">
                                     @error('employeeId')
+                                        <span class="text-danger help-block">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Role</label>
+                                    <select name="role" class="form-control @error('role') is-invalid @enderror" value="{{old('role')}}">
+                                        <option disabled selected value> -- select role -- </option>
+                                        <option value="super-admin">Super Admin</option>
+                                        <option value="office-admin">Office Admin</option>  
+                                        <option value="operator">Operator</option>  
+                                    </select>
+                                    @error('role')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
