@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">

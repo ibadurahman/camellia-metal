@@ -1,9 +1,11 @@
+
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-      <span class="brand-text font-weight-light">Camelia Metal</span>
+      <span class="brand-text font-weight-light">Camellia Metal</span>
     </a>
 
     <!-- Sidebar -->
@@ -39,7 +41,7 @@
               </form>
             </li>
           @endguest
-          @if(Auth::user()->getRoleNames()[0] == 'admin')
+          @hasanyrole('office-admin|super-admin')
             <li class="nav-header">ADMIN</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -50,12 +52,14 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{route('admin.user.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>Users</p>
-                  </a>
-                </li>
+                @hasrole('super-admin')
+                  <li class="nav-item">
+                    <a href="{{route('admin.user.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-user"></i>
+                      <p>Users</p>
+                    </a>
+                  </li>
+                @endhasrole
                 <li class="nav-item">
                   <a href="{{route('admin.supplier.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-building"></i>
@@ -94,7 +98,7 @@
                 </li>
               </ul>
             </li>
-          @endif
+          @endhasanyrole
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
             <a href="{{route('home')}}" class="nav-link">
@@ -114,6 +118,21 @@
               <p>Workorders</p>
             </a>
           </li>
+          @hasanyrole('operator|super-admin')
+            <li class="nav-header">OPERATOR</li>
+            <li class="nav-item">
+              <a href="{{route('schedule.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-calendar"></i>
+                <p>Schedule</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('production.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>Production</p>
+              </a>
+            </li>
+          @endhasanyrole
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

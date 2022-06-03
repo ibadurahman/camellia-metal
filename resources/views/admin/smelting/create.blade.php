@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -25,8 +25,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Weight</label>
-                                    <input id="smelt-weight" name="weight" type="text" class="form-control @error('weight') is-invalid @enderror" placeholder="Weight" value="{{old('weight')}}">
+                                    <label for="">Weight (Kg)</label>
+                                    <input id="smelt-weight" name="weight" type="text" class="form-control @error('weight') is-invalid @enderror" placeholder="Weight (Kg)" value="{{old('weight')}}">
                                     @error('weight')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
@@ -38,23 +38,12 @@
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="">Area</label>
-                                    <div class="row">
-                                        <input id="smelt-area" name="area" type="text" class="form-control @error('area') is-invalid @enderror" placeholder="Area" value="{{old('area')}}">
-                                        @error('area')
-                                            <span class="text-danger help-block">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-1">
                                             <button id="create-smelt" class="btn btn-primary">Add</button>
                                         </div>
-                                        <div class="col-1">
-                                            <a id="back-btn" href="{{route('admin.workorder.index')}}" class="btn btn-success">Done</a>
-                                        </div>
+                                        <a href="{{route('admin.workorder.index')}}" class="btn btn-success">Done</a>
                                     </div>
                                 </div>
                             </form>
@@ -70,7 +59,7 @@
                                     <tr>
                                         <th>WO Number</th>
                                         <th>No. Bundle</th>
-                                        <th>Weight</th>
+                                        <th>Weight (Kg)</th>
                                         <th>No. Leburan</th>
                                         {{-- <th>Area</th> --}}
                                         <th>Action</th>
@@ -158,8 +147,6 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                console.log(response);
-
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -169,7 +156,7 @@
                 });
                 location.reload();
             },
-            fail: function(response){
+            error: function(response){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'Failed',

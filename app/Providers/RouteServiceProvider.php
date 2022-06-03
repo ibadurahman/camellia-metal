@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('admin')
-                ->middleware('web', 'auth', 'role:admin')
+                ->middleware('web', 'auth')
                 ->name('admin.')
                 ->namespace($this->namespace . 'App\Http\Controllers\Admin')
                 ->group(base_path('routes/admin.php'));
@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace . 'App\Http\Controllers')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware('web','auth')
                 ->namespace($this->namespace. 'App\Http\Controllers')
                 ->group(base_path('routes/web.php'));
         });

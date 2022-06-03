@@ -10,6 +10,11 @@ use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +57,7 @@ class UserController extends Controller
             'password'=>bcrypt('12345678')
         ]);
 
-        $user->assignRole('user');
+        $user->assignRole($request->role);
 
         return redirect()->route('admin.user.index')->with('success','Data Added Successfully');
     }
@@ -78,6 +83,7 @@ class UserController extends Controller
     {
         return view('admin.user.edit',[
             'user'=>$user,
+            'role'=>$user->getRoleNames()[0],
             'title'=>'Admin: Edit User'
         ]);
     }
@@ -92,7 +98,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         //
-        $user->update($request->only(['name','employeeId']));
+        $user->update($request->only(['name','employeeId','role']));
 
         return redirect()->route('admin.user.index')->with('success','Data Updated Successfully');
     }

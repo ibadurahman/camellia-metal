@@ -138,3 +138,15 @@ Breadcrumbs::for('admin.customer.edit', function ($trail, $customer) {
     $trail->push('Edit Customer', route('admin.customer.edit', $customer));
 });
 
+// Operator Schedule
+Breadcrumbs::for('schedule.index', function ($trail) {
+    $trail->push('Home', route('home'));
+    $trail->push('Schedule', route('schedule.index'));
+});
+
+// Operator Production
+Breadcrumbs::for('production.index', function ($trail) {
+    $trail->push('Home', route('home'));
+    $trail->push('Production', route('production.index'));
+});
+

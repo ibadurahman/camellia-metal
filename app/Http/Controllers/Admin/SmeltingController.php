@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class SmeltingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|office-admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *

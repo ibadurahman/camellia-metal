@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
 
         return [
             'name'=>'required',
-            'employeeId'=>['required','min:12','max:12',$rule_user_unique]
+            'employeeId'=>['required','min:8','max:8',$rule_user_unique]
         ];
     }
 }

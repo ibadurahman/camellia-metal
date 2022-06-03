@@ -81,6 +81,26 @@ class RealtimeController extends Controller
         ],200);
     }
 
+    public function searchSpeed(Request $request)
+    {
+        $data = Realtime::select('speed','created_at');
+        
+        if($request->report_date_1 != null)
+        {
+            $data->where('created_at','>=',$request->report_date_1);
+        }
+        if($request->report_date_2 != null)
+        {
+            $data->where('created_at','<=',$request->report_date_2);
+        }
+        $data = json_decode($data->get());
+        $response = [
+            'speed' => array_column($data,'speed'),
+            'created_at'    => array_column($data,'created_at')
+        ];
+        return response()->json($response);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

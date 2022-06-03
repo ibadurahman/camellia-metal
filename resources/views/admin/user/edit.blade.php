@@ -1,4 +1,4 @@
-@extends('admin.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -24,6 +24,27 @@
                                     <label for="">Employee Id</label>
                                     <input name="employeeId" type="text" class="form-control @error('employeeId') is-invalid @enderror" placeholder="email" value="{{old('employeeId') ?? $user->employeeId}}">
                                     @error('employeeId')
+                                        <span class="text-danger help-block">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Role</label>
+                                    <select name="role" class="form-control @error('role') is-invalid @enderror" value="{{old('role')}}">
+                                        <option disabled selected value> -- select role -- </option>
+                                        <option value="super-admin"
+                                        @if ($role == 'super-admin')
+                                            selected
+                                        @endif>Super Admin</option>
+                                        <option value="office-admin"
+                                        @if ($role == 'office-admin')
+                                            selected
+                                        @endif>Office Admin</option>  
+                                        <option value="operator"
+                                        @if ($role == 'operator')
+                                            selected
+                                        @endif>Operator</option>  
+                                    </select>
+                                    @error('role')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>

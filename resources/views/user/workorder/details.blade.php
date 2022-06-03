@@ -1,4 +1,4 @@
-@extends('user.templates.default')
+@extends('templates.default')
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -79,12 +79,6 @@
                                                                 <li class="list-group-item">
                                                                     <b>Dies Number</b> <p class="float-right">{{$prod->dies_num}}</p>
                                                                 </li>
-<<<<<<< HEAD
-=======
-                                                                {{-- <li class="list-group-item">
-                                                                    <b>Area</b> <p class="float-right">{{$prod->area}}</p>
-                                                                </li> --}}
->>>>>>> d800324cb136df59406154c0c79ce5fb859d7f23
                                                                 <li class="list-group-item">
                                                                     <b>Diameter Ujung</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
                                                                 </li>
@@ -95,7 +89,7 @@
                                                                     <b>Diameter Ekor</b> <p class="float-right">{{$prod->diameter_ekor}} mm</p>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Kelurusan Actual</b> <p class="float-right">{{$prod->kelurusan_aktual}}</p>
+                                                                    <b>Kelurusan Actual</b> <p class="float-right">{{$prod->kelurusan_aktual}} mm</p>
                                                                 </li>
                                                                 <li class="list-group-item">
                                                                     <b>Berat FG</b> <p class="float-right">{{$prod->berat_fg}} Kg</p>
@@ -104,10 +98,23 @@
                                                                     <b>Pcs Per Bundle</b> <p class="float-right">{{$prod->pcs_per_bundle}} Pcs</p>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Bundle Judgement</b> <p class="float-right">{{$prod->bundle_judgement}}</p>
+                                                                    <b>Bundle Judgement</b> <p class="float-right">
+                                                                        @if ($prod->bundle_judgement == '1')
+                                                                            Good
+                                                                        @else
+                                                                            No Good
+                                                                        @endif
+                                                                        {{-- {{$prod->bundle_judgement}} --}}
+                                                                    </p>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Visual</b> <p class="float-right">{{$prod->visual}}</p>
+                                                                    <b>Visual</b> <p class="float-right">
+                                                                        @if ($prod->visual == 1)
+                                                                            Good
+                                                                        @endif
+                                                                        
+                                                                        {{-- {{$prod->visual}} --}}
+                                                                    </p>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -304,8 +311,13 @@
                                 </li>
                                 
                             </ul>
+                            
                             <div class="mt-5 mb-3">
-                                <button id="print-label" class="btn btn-sm btn-primary">Print Label</button>
+                                <button id="print-label" class="btn btn-sm btn-primary" 
+                                @if ($workorder->status_wo == 'draft')
+                                    disabled
+                                @endif
+                                >Print Label</button>
                             </div>
                         </div>
                     </div>
@@ -433,7 +445,7 @@
                                     labels:['OEE','Waste'],
                                     datasets:[
                                                 {
-                                                    data:[80,100],
+                                                    data:[response[0],100-response[0]],
                                                     // data:[response[0],100-response[0]],
                                                     backgroundColor:['#00a65a','#f56954']
                                                 }

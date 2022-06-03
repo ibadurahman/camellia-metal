@@ -1,4 +1,4 @@
-@extends('user.templates.default')
+@extends('templates.default')
 
 @section('content')
     <!-- Main content -->
@@ -20,7 +20,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total Runtime</span>
+                                            <span class="info-box-text text-center text-muted">Total Runtime (mm)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_runtime">0</span>
                                         </div>
                                     </div>
@@ -28,7 +28,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total Downtime</span>
+                                            <span class="info-box-text text-center text-muted">Total Downtime (mm)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_downtime">0</span>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total Pcs</span>
+                                            <span class="info-box-text text-center text-muted">Total Pcs (Pcs)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_pcs">0</span>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total Weight FG</span>
+                                            <span class="info-box-text text-center text-muted">Total Weight FG (Kg)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_weight_fg">0</span>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total Weight BB</span>
+                                            <span class="info-box-text text-center text-muted">Total Weight BB (Kg)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_weight_bb">0</span>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Average Speed</span>
+                                            <span class="info-box-text text-center text-muted">Average Speed (min)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="average_speed">0</span>
                                         </div>
                                     </div>
@@ -80,11 +80,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            
                             <form method="POST" id="search-form" class="form-inline" role="form">
-
                                 <div class="form-group">
-                                    <label>Search Data From</label>
+                                    <label style="padding-right: 10px ">Search Data From : </label>
                                     <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
                                         <input name="report_date_1" type="text" class="form-control datetimepicker-input @error('report_date_1') is-invalid @enderror" data-target="#reservationdatetime1" value="{{old('report_date_1')}}"/>
                                         <div class="input-group-append" data-target="#reservationdatetime1" data-toggle="datetimepicker">
@@ -93,7 +91,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>To</label>
+                                    <label style="padding-left: 10px; padding-right: 10px "> To : </label>
                                     <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
                                         <input name="report_date_2" type="text" class="form-control datetimepicker-input @error('report_date_2') is-invalid @enderror" data-target="#reservationdatetime2" value="{{old('report_date_2')}}"/>
                                         <div class="input-group-append" data-target="#reservationdatetime2" data-toggle="datetimepicker">
@@ -101,10 +99,9 @@
                                         </div>
                                     </div>
                                 </div>
-                    
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search</button>
                             </form>
-
+                            <br><br>
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -137,6 +134,7 @@
         $('#reservationdatetime2').datetimepicker({ 
             format: 'YYYY-MM-DD',
         });
+
     });
 </script>
 <script>
@@ -171,7 +169,6 @@
 
     $('#search-form').on('submit', function(e) {
         oTable.draw();
-        calculateSearch();
         e.preventDefault();
     });
 
