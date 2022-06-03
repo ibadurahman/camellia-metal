@@ -38,23 +38,12 @@
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="">Area</label>
-                                    <div class="row">
-                                        <input id="smelt-area" name="area" type="text" class="form-control @error('area') is-invalid @enderror" placeholder="Area" value="{{old('area')}}">
-                                        @error('area')
-                                            <span class="text-danger help-block">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-1">
                                             <button id="create-smelt" class="btn btn-primary">Add</button>
                                         </div>
-                                        <div class="col-1">
-                                            <a id="back-btn" href="{{route('admin.workorder.index')}}" class="btn btn-success">Done</a>
-                                        </div>
+                                        <a href="{{route('admin.workorder.index')}}" class="btn btn-success">Done</a>
                                     </div>
                                 </div>
                             </form>
@@ -158,8 +147,6 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-                console.log(response);
-
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -169,7 +156,7 @@
                 });
                 location.reload();
             },
-            fail: function(response){
+            error: function(response){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'Failed',

@@ -311,8 +311,13 @@
                                 </li>
                                 
                             </ul>
+                            
                             <div class="mt-5 mb-3">
-                                <button id="print-label" class="btn btn-sm btn-primary">Print Label</button>
+                                <button id="print-label" class="btn btn-sm btn-primary" 
+                                @if ($workorder->status_wo == 'draft')
+                                    disabled
+                                @endif
+                                >Print Label</button>
                             </div>
                         </div>
                     </div>

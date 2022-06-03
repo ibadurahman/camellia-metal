@@ -121,13 +121,13 @@
           @hasanyrole('operator|super-admin')
             <li class="nav-header">OPERATOR</li>
             <li class="nav-item">
-              <a href="{{route('home')}}" class="nav-link">
-                <i class="nav-icon fas fa-chart-line"></i>
+              <a href="{{route('schedule.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-calendar"></i>
                 <p>Schedule</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('dailyReport.index')}}" class="nav-link">
+              <a href="{{route('production.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>Production</p>
               </a>

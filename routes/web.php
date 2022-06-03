@@ -22,6 +22,8 @@ Route::get('/ajaxRequestAll', 'RealtimeController@ajaxRequestAll')
 ->middleware(['verified'])->name('realtime.ajaxRequestAll');
 Route::get('/workorderOnProcess', 'RealtimeController@workorderOnProcess')
 ->middleware(['verified'])->name('realtime.workorderOnProcess');
+Route::post('/searchSpeed','RealtimeController@searchSpeed')
+->middleware(['verified'])->name('realtime.searchSpeed');
 
 Route::get('/dailyReport', 'DailyReportController@index')
 ->middleware(['verified'])->name('dailyReport.index');
@@ -52,6 +54,24 @@ Route::get('/report/{wo_id}/printToPdf', 'ReportController@displayToPdf')
 ->middleware(['verified']);
 Route::get('/report/{wo_id}/printPage', 'ReportController@printPage')
 ->middleware(['verified']);
+
+Route::get('/operator/schedule','Operator\ScheduleController@index')
+->middleware(['verified'])->name('schedule.index');
+Route::post('/operator/schedule/{id}/process','Operator\ScheduleController@process')
+->middleware(['verified']);
+Route::get('/operator/showWaiting','Operator\ScheduleController@showWaiting')
+->middleware(['verified'])->name('workorder.showWaiting');
+Route::get('/operator/showOnProcess','Operator\ScheduleController@showOnProcess')
+->middleware(['verified'])->name('workorder.showOnProcess');
+Route::get('/operator/production','Operator\ProductionController@index')
+->middleware(['verified'])->name('production.index');
+Route::post('/operator/production/store','Operator\ProductionController@store')
+->middleware(['verified'])->name('production.store');
+Route::post('/operator/production/getSmeltingNum','Operator\ProductionController@getSmeltingNum')
+->middleware(['verified'])->name('production.getSmeltingNum');
+Route::post('/operator/production/storeOee','Operator\ProductionController@storeOee')
+->middleware(['verified'])->name('production.storeOee');
+
 
 
 
