@@ -29,7 +29,7 @@ class WorkorderResource extends JsonResource
             $smelting[] = [
                 'weight'        => $smelt->weight,
                 'smelting_num'  => $smelt->smelting_num,
-                'area'          => $smelt->area
+                // 'area'          => $smelt->area
             ]; 
         }
         return [
@@ -42,17 +42,18 @@ class WorkorderResource extends JsonResource
             'fg_customer'       =>$this->fg_customer,
             'fg_size_1'         =>$this->fg_size_1,
             'fg_size_2'         =>$this->fg_size_2,
-            'tolerance_plus'    =>$this->tolerance_plus,
+            // 'tolerance_plus'    =>$this->tolerance_plus,
             'tolerance_minus'   =>$this->tolerance_minus,
             'fg_reduction_rate' =>$this->fg_reduction_rate,
             'fg_shape'          =>$this->fg_shape,
-            'fg_qty'            =>$this->fg_qty,
+            'fg_qty_kg'         =>$this->fg_qty_kg,
+            'fg_qty_pcs'        =>$this->fg_qty_pcs,
             'wo_order_num'      =>$this->wo_order_num,
-            'operator'          =>$this->operator,
+            // 'operator'          =>$this->operator,
             // 'status_prod'       =>$status_prod,
             'status_wo'         =>$this->status_wo,
             'machine'           =>$this->machine->name,
-            'production_date'   =>$this->production_date,
+            // 'production_date'   =>$this->production_date,
             'user'              =>$this->user->name,
             'smelting_data'     =>$smelting
         ];
