@@ -40,7 +40,7 @@
         }
     </style>
     <body>
-        @foreach ($smeltings as $smelting)
+        @foreach ($productions as $prod)
             <h2>{{ $title }}</h2>
                 <p class="medium-text">A Subsidiary of Camellia Metal Co. Ltd</p>
                 <p class="address">JL. RAMIN 1 BLOK G6 No.9 DELTASILOCON VII LIPPO CIKARANG</p>
@@ -64,16 +64,13 @@
                     </tr>
                     <tr>
                         <td>Bundle</td>
-                        <td>: {{$smelting->bundle_num}}</td>
+                        <td>: {{$prod->bundle_num}}</td>
                     </tr>
                     <tr>
                         <td>N. WT</td>
-                        <td>: </td>
+                        <td>: {{$prod->berat_fg}}</td>
                     </tr>
-                    <tr>
-                        <td>Prod. Date</td>
-                        <td>: </td>
-                    </tr>
+
                     <tr>
                         <td>Job No.</td>
                         <td>: {{$data->wo_number}}</td>

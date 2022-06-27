@@ -101,6 +101,7 @@ class WorkorderController extends Controller
             // 'status_wo'             => '0',
             // 'status_smelting'       => '0',
             'user_id'               =>Auth::user()->id,
+            'edited_by'             =>Auth::user()->id,
             'machine_id'            =>$request->machine_id,
             'remarks'               =>$request->remarks
         ]);
@@ -169,7 +170,7 @@ class WorkorderController extends Controller
             // 'status_prod'           => '0',
             // 'status_wo'             => '0',
             // 'status_smelting'       => '0',
-            'user_id'               =>Auth::user()->id,
+            'edited_by'             =>Auth::user()->id,
             'machine_id'            =>$request->machine_id,
             'remarks'               =>$request->remarks
         ]);
@@ -182,12 +183,14 @@ class WorkorderController extends Controller
 
         // $workorders = Workorder::where('status_wo','0')->get();
         foreach($workorders as $workorder){
-            $workorder->timestamps = false;
+            // $workorder->timestamps = false;
             $id = $workorder->id;
 
             foreach($request->order as $order){
                 if($order['id'] == $id){
-                    $workorder->update(['wo_order_num' => $order['position']]);
+                    $workorder->update(['wo_order_num' => $order['position'],
+                                        'edited_by' => Auth::user()->id
+                                    ]);
                 }
             }
         }
@@ -222,6 +225,7 @@ class WorkorderController extends Controller
             $woOrderNum = null;
         }
 
+        $workorder->timestamps = false;
         $workorder->update([
             'status_wo'     => $request->state,
             'wo_order_num'  => $woOrderNum

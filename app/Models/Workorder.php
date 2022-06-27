@@ -36,6 +36,7 @@ class Workorder extends Model
         // 'status_smelting',
         'machine_id',
         'user_id',
+        'edited_by',
         'remarks'
     ];
 
@@ -64,5 +65,9 @@ class Workorder extends Model
 
     public function realtimes(){
         return $this->hasMany(Realtime::class);
+    }
+
+    public function dailyReport(){
+        return $this->belongsTo(DailyReport::class);
     }
 }

@@ -42,6 +42,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                         <th>Leburan</th>
                                         <th>Action</th>
                                     </tr>
@@ -84,6 +86,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                         <th>Leburan</th>
                                         <th>Action</th>
                                     </tr>
@@ -123,6 +127,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -168,6 +174,8 @@
                 {data:'machine'},
                 {data:'user'},  
                 {data:'created_at'},
+                {data:'updated_by'},
+                {data:'updated_at'},
                 {data:'smelting'},
                 {data:'action'},
             ],
@@ -202,8 +210,10 @@
                 // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'machine'},
-                {data:'user'},  
+                {data:'user'}, 
                 {data:'created_at'},
+                {data:'updated_by'},
+                {data:'updated_at'},
                 {data:'smelting'},
                 {data:'action'},
             ],
@@ -275,6 +285,8 @@
                 {data:'machine'},
                 {data:'user'},  
                 {data:'created_at'},
+                {data:'updated_by'},
+                {data:'updated_at'}
             ],
             "paging": false,
             "lengthChange": true,

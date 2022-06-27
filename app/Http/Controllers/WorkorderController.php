@@ -163,6 +163,7 @@ class WorkorderController extends Controller
 
         $oee = Oee::where('workorder_id',$request->workorder_id)->first();
         $workorder = Workorder::where('id',$request->workorder_id)->first();
+<<<<<<< HEAD
         $productions = Production::where('workorder_id',$request->workorder_id)->get();
         $totalProductions = 0;
         foreach($productions as $prod)
@@ -173,6 +174,25 @@ class WorkorderController extends Controller
         $oeeResult = [0,0,0,0];
         if ($oee && $totalProductions > 0) {
             $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $workorder->fg_qty_pcs*count($smeltings), $totalProductions, 3);
+=======
+        // $productions = Production::where('workorder_id',$request->workorder_id)->get();
+        $goodProduct = Production::where('workorder_id',$request->workorder_id)->where('bundle_judgement',1)->get();
+        $badProduct = Production::where('workorder_id',$request->workorder_id)->where('bundle_judgement',0)->get();
+        $totalGoodProductions = 0;
+        $totalBadProductions = 0;
+        foreach($goodProduct as $prod)
+        {
+            $totalGoodProductions += $prod->pcs_per_bundle;
+        }
+        foreach($badProduct as $prod)
+        {
+            $totalBadProductions += $prod->pcs_per_bundle;
+        }
+        $smeltings      = Smelting::where('workorder_id',$request->workorder_id)->get();
+        $oeeResult = [0,0,0,0];
+        if ($oee && $totalGoodProductions+$totalBadProductions > 0) {
+            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $totalGoodProductions + $totalBadProductions, $workorder->fg_qty_pcs*count($smeltings), 3, $totalBadProductions);
+>>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
         }
         
         $oee = Oee::where('workorder_id',$request->workorder_id)->first();
@@ -195,18 +215,31 @@ class WorkorderController extends Controller
         //
         $oee = Oee::where('workorder_id',$request['id'])->first();
         $workorder = Workorder::where('id',$request['id'])->first();
-        $productions = Production::where('workorder_id',$request['id'])->get();
-        $totalProductions = 0;
-        foreach($productions as $prod)
+        $productions = Production::where('workorder_id',$request['id'])->orderBy('bundle_num','asc')->get();
+        $goodProduct = Production::where('workorder_id',$request['id'])->where('bundle_judgement',1)->get();
+        $badProduct = Production::where('workorder_id',$request['id'])->where('bundle_judgement',0)->get();
+        $totalGoodProductions = 0;
+        $totalBadProductions = 0;
+        foreach($goodProduct as $prod)
         {
-            $totalProductions += $prod->pcs_per_bundle;
+            $totalGoodProductions += $prod->pcs_per_bundle;
+        }
+        foreach($badProduct as $prod)
+        {
+            $totalBadProductions += $prod->pcs_per_bundle;
         }
         $smeltings      = Smelting::where('workorder_id',$request['id'])->get();
         $user           = User::where('id',$workorder->user_id)->first();
+        $lastUpdate     = User::where('id',$workorder->edited_by)->first();
 
         $oeeResult          = [0,0,0,0];
+<<<<<<< HEAD
         if ($oee && $totalProductions>0) {
             $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $workorder->fg_qty_pcs*count($smeltings), $totalProductions, 3);
+=======
+        if ($oee && $totalGoodProductions+$totalBadProductions>0) {
+            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $totalGoodProductions + $totalBadProductions, $workorder->fg_qty_pcs*count($smeltings), 3,$totalBadProductions);
+>>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
         }
 
         return view('user.workorder.details',[
@@ -215,12 +248,15 @@ class WorkorderController extends Controller
             'workorder'         => $workorder,
             'productions'       => $productions,
             'smeltings'         => $smeltings,
-            'totalProduction'   => $totalProductions,
+            'totalProduction'   => $totalGoodProductions + $totalBadProductions,
+            'totalGoodProduction'=> $totalGoodProductions,
+            'totalBadProduction'=> $totalBadProductions,
             'otr'               => $oeeResult[1],
             'per'               => $oeeResult[2],
             'qr'                => $oeeResult[3],
             'oee_val'           => $oeeResult[0],
-            'createdBy'         => $user
+            'createdBy'         => $user,
+            'updatedBy'         => $lastUpdate
         ]);
     }
 

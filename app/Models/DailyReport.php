@@ -10,12 +10,19 @@ class DailyReport extends Model
     use HasFactory;
 
     protected $fillable = [
-        'report_date',
+        'workorder_id',
         'total_runtime',
         'total_downtime',
         'total_pcs',
+        'total_pcs_good',
+        'total_pcs_bad',
         'total_weight_fg',
         'total_weight_bb',
-        'average_speed'
+        // 'average_speed'
     ];
+
+    public function workorder()
+    {
+        return $this->belongsTo(Workorder::class);
+    }
 }

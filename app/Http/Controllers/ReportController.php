@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Smelting;
 use PDF;
+use App\Models\Smelting;
 use App\Models\Workorder;
+use App\Models\Production;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -13,10 +14,12 @@ class ReportController extends Controller
     public function displayToPdf(Workorder $wo_id)
     {
         $smeltings = Smelting::where('workorder_id',$wo_id->id)->get();
+        $productions = Production::where('workorder_id',$wo_id->id)->get();
         $data = [
             'title'     => 'Camellia Metal',
             'data'      => $wo_id,
-            'smeltings' => $smeltings
+            'smeltings' => $smeltings,
+            'productions'   => $productions
         ];
            
         $pdf = PDF::loadView('user.pdf.index', $data);
@@ -28,13 +31,13 @@ class ReportController extends Controller
 
     public function printPage(Workorder $wo_id)
     {
-        $data = [
-            'data'      => $wo_id,
-        ];
-        $pdf = PDF::loadView('user.workorder.details',$data);
-        $pdf->setPaper('A4','potrait');
-        $pdf->render();
+        // $data = [
+        //     'data'      => $wo_id,
+        // ];
+        // $pdf = PDF::loadView('user.workorder.details',$data);
+        // $pdf->setPaper('A4','potrait');
+        // $pdf->render();
      
-        return $pdf->stream('details_page.pdf');
+        // return $pdf->stream('details_page.pdf');
     }
 }

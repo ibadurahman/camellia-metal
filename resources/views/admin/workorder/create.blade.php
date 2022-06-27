@@ -24,10 +24,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Supplier</label>
-                                    <select id="supplier-cmbbx" name="bb_supplier" class="form-control @error('bb_supplier') is-invalid @enderror" value="{{old('bb_supplier')}}">
+                                    <select id="supplier-cmbbx" name="bb_supplier" class="form-control @error('bb_supplier') is-invalid @enderror" value="">
                                         <option disabled selected value> -- select supplier -- </option>
                                         @foreach ($suppliers as $supplier)
-                                            <option value="{{$supplier->name}}">{{$supplier->name}}</option>  
+                                            <option value="{{$supplier->name}}" @if (old('bb_supplier') == $supplier->name)
+                                                selected
+                                            @endif>{{$supplier->name}}</option>  
                                         @endforeach
                                     </select>
                                     @error('bb_supplier')
@@ -77,10 +79,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Customer</label>
-                                    <select id="customer-cmbbx" name="fg_customer" class="form-control @error('fg_customer') is-invalid @enderror" value="{{old('fg_customer')}}">
+                                    <select id="customer-cmbbx" name="fg_customer" class="form-control @error('fg_customer') is-invalid @enderror">
                                         <option disabled selected value> -- select customer -- </option>
                                         @foreach ($customers as $customer)
-                                            <option value="{{$customer->name}}">{{$customer->name}}</option>  
+                                            <option value="{{$customer->name}}" @if (old('fg_customer') == $customer->name)
+                                                selected
+                                            @endif>{{$customer->name}}</option>  
                                         @endforeach
                                     </select>
                                     @error('fg_customer')
@@ -136,9 +140,15 @@
                                     <label for="">Shape</label>
                                     <select name="fg_shape" id="customer-shape" class="form-control @error('fg_shape') is-invalid @enderror" >
                                         <option disabled selected value> -- select shape -- </option>
-                                        <option id="shape-round" value="Round">Round</option>
-                                        <option id="shape-square" value="Square">Square</option>  
-                                        <option id="shape-hexagon" value="Hexagon">Hexagon</option>  
+                                        <option id="shape-round" value="Round" @if (old('fg_shape') == 'Round')
+                                            selected
+                                        @endif>Round</option>
+                                        <option id="shape-square" value="Square" @if (old('fg_shape') == 'Square')
+                                            selected
+                                        @endif>Square</option>  
+                                        <option id="shape-hexagon" value="Hexagon" @if (old('fg_shape') == 'Hexagon')
+                                            selected
+                                        @endif>Hexagon</option>  
                                     </select>
                                     @error('fg_shape')
                                         <span class="text-danger help-block">{{$message}}</span>

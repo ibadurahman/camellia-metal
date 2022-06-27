@@ -15,14 +15,20 @@ class CreateDailyReportsTable extends Migration
     {
         Schema::create('daily_reports', function (Blueprint $table) {
             $table->id();
-            $table->date('report_date');
+            $table->unsignedBigInteger('workorder_id');
             $table->bigInteger('total_runtime');
             $table->bigInteger('total_downtime');
             $table->bigInteger('total_pcs');
+            $table->bigInteger('total_pcs_good');
+            $table->bigInteger('total_pcs_bad');
             $table->bigInteger('total_weight_fg');
             $table->bigInteger('total_weight_bb');
-            $table->bigInteger('average_speed');
+            // $table->bigInteger('average_speed');
             $table->timestamps();
+
+            $table->foreign('workorder_id')->references('id')->on('workorders')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
     }
 

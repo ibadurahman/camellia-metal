@@ -45,6 +45,12 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Total Production</span>
                                             <span class="info-box-number text-center text-muted mb-0">{{$totalProduction}} Pcs</span>
+<<<<<<< HEAD
+=======
+                                            <span class="text-left text-muted mb-0"><b>Good:</b> {{$totalGoodProduction}} Pcs</span>
+                                            <span class="text-left text-muted mb-0"><b>Bad:</b> {{$totalBadProduction}} Pcs</span>
+
+>>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +63,7 @@
                                             <p>Bundle Num</p>
                                             <ul class="nav nav-pills">
                                                 @foreach ($productions as $prod)
-                                                    <li class="nav-item"><a class="nav-link" href="#production{{$prod->bundle_num}}" data-toggle="tab">{{$prod->bundle_num}}</a></li>
+                                                    <li class="nav-item"><a class="nav-link @if($prod->bundle_judgement == 0) text-danger @endif" href="#production{{$prod->bundle_num}}" data-toggle="tab">{{$prod->bundle_num}}</a></li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -109,11 +115,18 @@
                                                                 </li>
                                                                 <li class="list-group-item">
                                                                     <b>Visual</b> <p class="float-right">
-                                                                        @if ($prod->visual == 1)
-                                                                            Good
-                                                                        @endif
-                                                                        
-                                                                        {{-- {{$prod->visual}} --}}
+                                                                        {{$prod->visual}}
+                                                                    </p>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Created By</b> <p class="float-right">
+                                                                        {{$prod->user->name}} at ({{date('Y-m-d H:i:s',strtotime($prod->created_at))}})
+                                                                    </p>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Last Edited By</b> <p class="float-right">
+                                                                        @php $lastEdit = \App\Models\User::where('id',$prod->edited_by)->first(); @endphp
+                                                                        {{$lastEdit->name}} at ({{date('Y-m-d H:i:s',strtotime($prod->updated_at))}})
                                                                     </p>
                                                                 </li>
                                                             </ul>
@@ -258,14 +271,9 @@
                                 <h5 class="text-muted">QR : {{round($qr,2)}} %</h5>
                                 <br>
                             @endif
-                            <div class="text-muted">
-                                <p class="text-sm">Workorder Number
-                                    <b class="d-block">{{$workorder->wo_number}}</b>
-                                </p>
-                                <p class="text-sm">Created By
-                                    <b class="d-block">{{$createdBy->name}}</b>
-                                </p>
-                            </div>
+                            <h5 class="text-muted" style="margin:1px;padding:1px;"><b>{{$workorder->wo_number}}</b></h5>
+                            <p class="text-muted" style="margin:1px;padding:1px;">Created By {{$createdBy->name}} at ({{date('Y-m-d H:i:s',strtotime($workorder->created_at))}})</p>
+                            <p class="text-muted" style="margin:1px;padding:1px;">Last Edited By {{$updatedBy->name}} at ({{date('Y-m-d H:i:s',strtotime($workorder->updated_at))}})</p>
                             <h5 class="mt-5 text-muted">Bahan Baku</h5>
                             <ul class="list-unstyled">
                                 <li>
@@ -440,7 +448,11 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
+<<<<<<< HEAD
                 console.log(response);
+=======
+                // console.log(response);
+>>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
                 var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
                 var pieData=    {
                                     labels:['OEE','Waste'],

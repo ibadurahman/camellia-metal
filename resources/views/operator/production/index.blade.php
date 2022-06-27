@@ -87,22 +87,22 @@
                                                                             <b>Dies Number</b> <p class="float-right">{{$prod->dies_num}}</p>
                                                                         </li>
                                                                         <li class="list-group-item">
-                                                                            <b>Diameter Ujung</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
+                                                                            <b>Diameter Ujung (mm)</b> <p class="float-right">{{$prod->diameter_ujung}} mm</p> 
                                                                         </li>
                                                                         <li class="list-group-item">
-                                                                            <b>Diameter Tengah</b> <p class="float-right">{{$prod->diameter_tengah}} mm</p>
+                                                                            <b>Diameter Tengah (mm)</b> <p class="float-right">{{$prod->diameter_tengah}} mm</p>
                                                                         </li>
                                                                         <li class="list-group-item">
-                                                                            <b>Diameter Ekor</b> <p class="float-right">{{$prod->diameter_ekor}} mm</p>
+                                                                            <b>Diameter Ekor (mm)</b> <p class="float-right">{{$prod->diameter_ekor}} mm</p>
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Kelurusan Actual</b> <p class="float-right">{{$prod->kelurusan_aktual}} mm</p>
                                                                         </li>
                                                                         <li class="list-group-item">
-                                                                            <b>Berat FG</b> <p class="float-right">{{$prod->berat_fg}} Kg</p>
+                                                                            <b>Berat FG (Kg)</b> <p class="float-right">{{$prod->berat_fg}} Kg</p>
                                                                         </li>
                                                                         <li class="list-group-item">
-                                                                            <b>Pcs Per Bundle</b> <p class="float-right">{{$prod->pcs_per_bundle}} Pcs</p>
+                                                                            <b>Pcs Per Bundle (Pcs)</b> <p class="float-right">{{$prod->pcs_per_bundle}} Pcs</p>
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Bundle Judgement</b> <p class="float-right">
@@ -116,10 +116,19 @@
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Visual</b> <p class="float-right">
-                                                                                @if ($prod->visual == 1)
-                                                                                    Good
-                                                                                @endif
-                                                                                
+                                                                                {{$prod->visual}}
+                                                                                {{-- {{$prod->visual}} --}}
+                                                                            </p>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b>Created by </b> <p class="float-right">
+                                                                                {{$prod->user->name}} ({{date('Y-m-d H:i:s',strtotime($prod->created_at))}})
+                                                                                {{-- {{$prod->visual}} --}}
+                                                                            </p>
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b>Last Edit by </b> <p class="float-right">
+                                                                                {{$prod->user->name}} ({{date('Y-m-d H:i:s',strtotime($prod->updated_at))}})
                                                                                 {{-- {{$prod->visual}} --}}
                                                                             </p>
                                                                         </li>
@@ -177,21 +186,21 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Diameter Ujung</label>
+                                                        <label for="">Diameter Ujung (mm)</label>
                                                         <input type="text" name="diameter-ujung" class="form-control @error('diameter-ujung') is-invalid @enderror" placeholder="Diameter Ujung" value="{{old('diameter-ujung')}}">
                                                         @error('diameter-ujung')
                                                             <span class="text-danger help-block">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Diameter Tengah</label>
+                                                        <label for="">Diameter Tengah (mm)</label>
                                                         <input type="text" name="diameter-tengah" class="form-control @error('diameter-tengah') is-invalid @enderror" placeholder="Diameter Tengah" value="{{old('diameter-tengah')}}">
                                                         @error('diameter-tengah')
                                                             <span class="text-danger help-block">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Diameter Ekor</label>
+                                                        <label for="">Diameter Ekor (mm)</label>
                                                         <input type="text" name="diameter-ekor" class="form-control @error('diameter-ekor') is-invalid @enderror" placeholder="Diameter Ekor" value="{{old('diameter-ekor')}}">
                                                         @error('diameter-ekor')
                                                             <span class="text-danger help-block">{{$message}}</span>
@@ -205,21 +214,21 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Panjang Aktual</label>
+                                                        <label for="">Panjang Aktual (mm)</label>
                                                         <input type="text" name="panjang-aktual" class="form-control @error('panjang-aktual') is-invalid @enderror" placeholder="Panjang Aktual" value="{{old('panjang-aktual')}}">
                                                         @error('panjang-aktual')
                                                             <span class="text-danger help-block">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Berat Finish Good</label>
+                                                        <label for="">Berat Finish Good (KG)</label>
                                                         <input type="text" name="berat-fg" class="form-control @error('berat-fg') is-invalid @enderror" placeholder="Berat Finish Good" value="{{old('berat-fg')}}">
                                                         @error('berat-fg')
                                                             <span class="text-danger help-block">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Pcs per Bundle</label>
+                                                        <label for="">Pcs per Bundle (Pcs)</label>
                                                         <input type="text" name="pcs-per-bundle" class="form-control @error('pcs-per-bundle') is-invalid @enderror" placeholder="Pcs Per Bundle" value="{{old('pcs-per-bundle')}}">
                                                         @error('pcs-per-bundle')
                                                             <span class="text-danger help-block">{{$message}}</span>
@@ -239,9 +248,46 @@
                                                     <div class="form-group">
                                                         <label for="">Visual</label>
                                                         <select name="visual" id="" class="form-control @error('visual') is-invalid @enderror">
-                                                            <option value="">-- Select Judgement --</option>
-                                                            <option value="1">Good</option>
-                                                            <option value="0">Not Good</option>
+                                                            <option disabled value="">-- Select Judgement --</option>
+                                                            <option value="OK" @if (old('visual') == 'OK')
+                                                                selected
+                                                            @endif>OK</option>
+                                                            <option value="PO" @if (old('visual') == 'PO')
+                                                                selected
+                                                            @endif>PO</option>
+                                                            <option value="OT" @if (old('visual') == 'OT')
+                                                                selected
+                                                            @endif>OT</option>
+                                                            <option value="IL" @if (old('visual') == 'IL')
+                                                                selected
+                                                            @endif>IL</option>
+                                                            <option value="OS" @if (old('visual') == 'OS')
+                                                                selected
+                                                            @endif>OS</option>
+                                                            <option value="LS" @if (old('visual') == 'LS')
+                                                                selected
+                                                            @endif>LS</option>
+                                                            <option value="OVAL" @if (old('visual') == 'OVAL')
+                                                                selected
+                                                            @endif>OVAL</option>
+                                                            <option value="TS" @if (old('visual') == 'TS')
+                                                                selected
+                                                            @endif>TS</option>
+                                                            <option value="BM" @if (old('visual') == 'BM')
+                                                                selected
+                                                            @endif>BM</option>
+                                                            <option value="CM" @if (old('visual') == 'CM')
+                                                                selected
+                                                            @endif>CM</option>
+                                                            <option value="SP" @if (old('visual') == 'SP')
+                                                                selected
+                                                            @endif>SP</option>
+                                                            <option value="MH" @if (old('visual') == 'MH')
+                                                                selected
+                                                            @endif>MH</option>
+                                                            <option value="RUSTY" @if (old('visual') == 'RUSTY')
+                                                                selected
+                                                            @endif>RUSTY</option>
                                                         </select>
                                                         @error('visual')
                                                             <span class="text-danger help-block">{{$message}}</span>
@@ -293,28 +339,28 @@
                                                         </div>
                                                     </div>
                                                     <li class="list-group-item">
-                                                        <b>Briefing</b> <p class="float-right">{{$oee->dt_briefing}} min</p>
+                                                        <b>Briefing (min)</b> <p class="float-right">{{$oee->dt_briefing}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Check Shot Blast</b> <p class="float-right">{{$oee->dt_cek_shot_blast}} min</p>
+                                                        <b>Check Shot Blast (min)</b> <p class="float-right">{{$oee->dt_cek_shot_blast}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Check Mesin</b> <p class="float-right">{{$oee->dt_cek_mesin}} min</p>
+                                                        <b>Check Mesin (min)</b> <p class="float-right">{{$oee->dt_cek_mesin}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Sambung Bahan</b> <p class="float-right">{{$oee->dt_sambung_bahan}} min</p>
+                                                        <b>Sambung Bahan (min)</b> <p class="float-right">{{$oee->dt_sambung_bahan}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Setting Awal</b> <p class="float-right">{{$oee->dt_setting_awal}} min</p>
+                                                        <b>Setting Awal (min)</b> <p class="float-right">{{$oee->dt_setting_awal}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Selesai Satu Bundle</b> <p class="float-right">{{$oee->dt_selesai_satu_bundle}} min</p>
+                                                        <b>Selesai Satu Bundle (min)</b> <p class="float-right">{{$oee->dt_selesai_satu_bundle}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Cleaning Area Mesin</b> <p class="float-right">{{$oee->dt_cleaning_area_mesin}} min</p>
+                                                        <b>Cleaning Area Mesin (min)</b> <p class="float-right">{{$oee->dt_cleaning_area_mesin}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Istirahat</b> <p class="float-right">{{$oee->dt_istirahat}} min</p>
+                                                        <b>Istirahat (min)</b> <p class="float-right">{{$oee->dt_istirahat}} min</p>
                                                     </li>
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Waste Downtime
@@ -329,46 +375,46 @@
                                                         </div>
                                                     </div>
                                                     <li class="list-group-item">
-                                                        <b>Bongkar Pasang Dies</b> <p class="float-right">{{$oee->dt_bongkar_pasang_dies}} min</p>
+                                                        <b>Bongkar Pasang Dies (min)</b> <p class="float-right">{{$oee->dt_bongkar_pasang_dies}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Tunggu Bahan Baku</b> <p class="float-right">{{$oee->dt_tunggu_bahan_baku}} min</p>
+                                                        <b>Tunggu Bahan Baku (min)</b> <p class="float-right">{{$oee->dt_tunggu_bahan_baku}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Ganti Bahan Baku</b> <p class="float-right">{{$oee->dt_ganti_bahan_baku}} min</p>
+                                                        <b>Ganti Bahan Baku (min)</b> <p class="float-right">{{$oee->dt_ganti_bahan_baku}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Tunggu Dies</b> <p class="float-right">{{$oee->dt_tunggu_dies}} min</p>
+                                                        <b>Tunggu Dies (min)</b> <p class="float-right">{{$oee->dt_tunggu_dies}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Gosok Dies</b> <p class="float-right">{{$oee->dt_gosok_dies}} min</p>
+                                                        <b>Gosok Dies (min)</b> <p class="float-right">{{$oee->dt_gosok_dies}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Ganti Part Short Blast</b> <p class="float-right">{{$oee->dt_ganti_part_shot_blast}} min</p>
+                                                        <b>Ganti Part Short Blast (min)</b> <p class="float-right">{{$oee->dt_ganti_part_shot_blast}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>setting Ulang Kelurusan</b> <p class="float-right">{{$oee->dt_setting_ulang_kelurusan}} min</p>
+                                                        <b>setting Ulang Kelurusan (min)</b> <p class="float-right">{{$oee->dt_setting_ulang_kelurusan}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Ganti Polishing Dies</b> <p class="float-right">{{$oee->dt_ganti_polishing_dies}} min</p>
+                                                        <b>Ganti Polishing Dies (min)</b> <p class="float-right">{{$oee->dt_ganti_polishing_dies}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Ganti Nozle Polishing Mesin</b> <p class="float-right">{{$oee->dt_ganti_nozle_polishing_mesin}} min</p>
+                                                        <b>Ganti Nozle Polishing Mesin (min)</b> <p class="float-right">{{$oee->dt_ganti_nozle_polishing_mesin}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Ganti Roller Straightener</b> <p class="float-right">{{$oee->dt_ganti_roller_straightener}} min</p>
+                                                        <b>Ganti Roller Straightener (min)</b> <p class="float-right">{{$oee->dt_ganti_roller_straightener}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Dies Rusak</b> <p class="float-right">{{$oee->dt_dies_rusak}} min</p>
+                                                        <b>Dies Rusak (min)</b> <p class="float-right">{{$oee->dt_dies_rusak}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Mesin Trouble Operator</b> <p class="float-right">{{$oee->dt_mesin_trouble_operator}} min</p>
+                                                        <b>Mesin Trouble Operator (min)</b> <p class="float-right">{{$oee->dt_mesin_trouble_operator}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Validasi QC</b> <p class="float-right">{{$oee->dt_validasi_qc}} min</p>
+                                                        <b>Validasi QC (min)</b> <p class="float-right">{{$oee->dt_validasi_qc}} min</p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <b>Mesin Trouble Maintenance</b> <p class="float-right">{{$oee->dt_mesin_trouble_maintenance}} min</p>
+                                                        <b>Mesin Trouble Maintenance (min)</b> <p class="float-right">{{$oee->dt_mesin_trouble_maintenance}} min</p>
                                                     </li>
                                                 </ul>
                                             @endif
@@ -393,103 +439,103 @@
                                                     @csrf
                                                     <input hidden name="oee_workorder_id" type="text" value="{{$workorder->id}}">
                                                     <div class="form-group">
-                                                        <label for="">DT Briefing</label>
+                                                        <label for="">DT Briefing (min)</label>
                                                         <input name="dt-briefing" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Cek Shot Blast</label>
+                                                        <label for="">DT Cek Shot Blast (min)</label>
                                                         <input name="dt-cek-shot-blast" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Cek Mesin</label>
+                                                        <label for="">DT Cek Mesin (min)</label>
                                                         <input name="dt-cek-mesin" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Sambung Bahan</label>
+                                                        <label for="">DT Sambung Bahan (min)</label>
                                                         <input name="dt-sambung-bahan" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Bongkar Pasang Dies</label>
+                                                        <label for="">DT Bongkar Pasang Dies (min)</label>
                                                         <input name="dt-bongkar-pasang-dies" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Setting Awal</label>
+                                                        <label for="">DT Setting Awal (min)</label>
                                                         <input name="dt-setting-awal" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Selesai Satu Bundle</label>
+                                                        <label for="">DT Selesai Satu Bundle (min)</label>
                                                         <input name="dt-selesai-satu-bundle" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Cleaning Area Mesin</label>
+                                                        <label for="">DT Cleaning Area Mesin (min)</label>
                                                         <input name="dt-cleaning-area-mesin" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Tunggu Bahan Baku</label>
+                                                        <label for="">DT Tunggu Bahan Baku (min)</label>
                                                         <input name="dt-tunggu-bahan-baku" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Ganti Bahan Baku</label>
+                                                        <label for="">DT Ganti Bahan Baku (min)</label>
                                                         <input name="dt-ganti-bahan-baku" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Tunggu Dies</label>
+                                                        <label for="">DT Tunggu Dies (min)</label>
                                                         <input name="dt-tunggu-dies" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Gosok Dies</label>
+                                                        <label for="">DT Gosok Dies (min)</label>
                                                         <input name="dt-gosok-dies" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Ganti Part Shot Blast</label>
+                                                        <label for="">DT Ganti Part Shot Blast (min)</label>
                                                         <input name="dt-ganti-part-shot-blast" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Putus Dies</label>
+                                                        <label for="">DT Putus Dies (min)</label>
                                                         <input name="dt-putus-dies" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Setting Ulang Kelurusan</label>
+                                                        <label for="">DT Setting Ulang Kelurusan (min)</label>
                                                         <input name="dt-setting-ulang-kelurusan" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Ganti Polishing Dies</label>
+                                                        <label for="">DT Ganti Polishing Dies (min)</label>
                                                         <input name="dt-ganti-polishing-dies" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Ganti Nozle Polishing Mesin</label>
+                                                        <label for="">DT Ganti Nozle Polishing Mesin (min)</label>
                                                         <input name="dt-ganti-nozle-polishing-mesin" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Ganti Roller Straightener</label>
+                                                        <label for="">DT Ganti Roller Straightener (min)</label>
                                                         <input name="dt-ganti-roller-straightener" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Dies Rusak</label>
+                                                        <label for="">DT Dies Rusak (min)</label>
                                                         <input name="dt-dies-rusak" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Mesin Trouble Operator</label>
+                                                        <label for="">DT Mesin Trouble Operator (min)</label>
                                                         <input name="dt-mesin-trouble-operator" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Validasi QC</label>
+                                                        <label for="">DT Validasi QC (min)</label>
                                                         <input name="dt-validasi-qc" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Mesin Trouble Maintenance</label>
+                                                        <label for="">DT Mesin Trouble Maintenance (min)</label>
                                                         <input name="dt-mesin-trouble-maintenance" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">DT Istirahat</label>
+                                                        <label for="">DT Istirahat (min)</label>
                                                         <input name="dt-istirahat" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Total Runtime</label>
+                                                        <label for="">Total Runtime (min)</label>
                                                         <input name="total-runtime" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Total Downtime</label>
+                                                        <label for="">Total Downtime (min)</label>
                                                         <input name="total-downtime" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
@@ -512,30 +558,10 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                            {{-- @if ($oee_val != 0)
-                                <h1 class="text-muted">OEE</h1>
-                                <div class="card-body">
-                                    <div class="tab-content p-0">
-                                        <div class="chart tab-pane active" id="oee-chart" style="position: relative; height: 300px;">
-                                            <canvas id="oee-chart-canvas" height="300" style="height: 300px;"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <h2 class="text-primary">{{round($oee_val,2)}} %</h2>
-                                <h5 class="text-muted">OTR : {{round($otr,2)}} %</h5>
-                                <h5 class="text-muted">PER : {{round($per,2)}} %</h5>
-                                <h5 class="text-muted">QR : {{round($qr,2)}} %</h5> --}}
-                                {{-- <br>
-                            @endif --}}
-                            <div class="text-muted">
-                                <p class="text-sm">Workorder Number
-                                    <b class="d-block">{{$workorder->wo_number}}</b>
-                                </p>
-                                <p class="text-sm">Created By
-                                    <b class="d-block">{{$createdBy->name}}</b>
-                                </p>
-                            </div>
-                            <h5 class="mt-5 text-muted">Bahan Baku</h5>
+                            <h5 class="text-muted" style="margin:1px;padding:1px;"><b>{{$workorder->wo_number}}</b></h5>
+                            <p class="text-muted" style="margin:1px;padding:1px;">Created By {{$createdBy->name}} at ({{date('Y-m-d H:i:s',strtotime($workorder->created_at))}})</p>
+                            <p class="text-muted" style="margin:1px;padding:1px;">Last Edited By {{$updatedBy->name}} at ({{date('Y-m-d H:i:s',strtotime($workorder->updated_at))}})</p>
+                            <h5 class="mt-5 text-muted"><b>Bahan Baku</b></h5>
                             <ul class="list-unstyled">
                                 <li>
                                     <p href="" class="text-secondary"> Supplier: {{$workorder->bb_supplier}}</p>
@@ -550,7 +576,7 @@
                                     <p href="" class="text-secondary"> Qty/Bundle: {{$workorder->bb_qty_pcs}} Kg / {{$workorder->bb_qty_coil}} Bundle</p>
                                 </li>
                             </ul>
-                            <h5 class="mt-5 text-muted">Finish Good</h5>
+                            <h5 class="mt-5 text-muted"><b>Finish Good</b></h5>
                             <ul class="list-unstyled">
                                 <li>
                                     <p href="" class="text-secondary"> Size: {{$workorder->fg_size_1}} mm X {{$workorder->fg_size_2}} mm</p>
@@ -568,7 +594,7 @@
                                     <p href="" class="text-secondary"> Qty: {{$workorder->fg_qty_pcs}} Pcs</p>
                                 </li>
                             </ul>
-                            <h5 class="mt-5 text-muted">Others</h5>
+                            <h5 class="mt-5 text-muted"><b>Other</b></h5>
                             <ul class="list-unstyled">
                                 <li>
                                     <p href="" class="text-secondary"> Status WO: 
@@ -601,135 +627,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(function(){
-        // $.ajax({
-        //     type: "POST",
-        //     dataType: "json", 
-        //     url: "{{route('workorder.getDowntime')}}",
-        //     data: {
-        //         workorder_id:'{{$workorder->id}}}',
-        //         data:'management_time',
-        //         _token: '{{csrf_token()}}'
-        //     },
-        //     success: function(response) {
-        //         var salesChartCanvas=document.getElementById('management-chart-canvas').getContext('2d');
-        //         var salesChartData= {
-        //                         labels:[
-        //                                     'Briefing',
-        //                                     'Cek Shot Blast',
-        //                                     'Cek Mesin',
-        //                                     'Sambung Bahan',
-        //                                     'Setting Awal',
-        //                                     'Selesai Satu Bundle',
-        //                                     'Cleaning Area Mesin',
-        //                                     'Istirahat'
-        //                                 ],
-        //                         datasets:[
-        //                                     {
-        //                                         label:'Management Downtimes',
-        //                                         backgroundColor:'rgba(60,141,188,0.9)',
-        //                                         borderColor:'rgba(60,141,188,0.8)',
-        //                                         pointRadius:false,
-        //                                         pointColor:'#3b8bba',
-        //                                         pointStrokeColor:'rgba(60,141,188,1)',
-        //                                         pointHighlightFill:'#fff',
-        //                                         pointHighlightStroke:'rgba(60,141,188,1)',
-        //                                         data: response
-        //                                     },
-        //                                 ]
-        //                     }
-        //         var salesChartOptions=  {
-        //                                     maintainAspectRatio:false,
-        //                                     responsive:true,
-        //                                     legend:{display:false},
-        //                                     scales:{xAxes:[{gridLines:{display:false}}],
-        //                                     yAxes:[{gridLines:{display:false}}]}
-        //                                 }
-        //         var salesChart= new Chart(salesChartCanvas,{type:'bar',data:salesChartData,options:salesChartOptions});
-        //     }
-        // });
-
-        // $.ajax({
-        //     type: "POST",
-        //     dataType: "json", 
-        //     url: "{{route('workorder.getDowntime')}}",
-        //     data: {
-        //         workorder_id:'{{$workorder->id}}}',
-        //         data:'downtime',
-        //         _token: '{{csrf_token()}}'
-        //     },
-        //     success: function(response) {
-        //         var salesChartCanvas=document.getElementById('downtime-chart-canvas').getContext('2d');
-        //         var salesChartData= {
-        //                         labels:[
-        //                                     'Bongkar Pasang Dies',
-        //                                     'Tunggu Bahan Baku',
-        //                                     'Ganti Bahan Baku',
-        //                                     'Tunggu Dies',
-        //                                     'Gosok Dies',
-        //                                     'Ganti Part Shot Blast',
-        //                                     'Setting Ulang Kelurusan',
-        //                                     'Ganti Polishing Dies',
-        //                                     'Ganti Nozle Polishing Mesin',
-        //                                     'Ganti Roller Straightener',
-        //                                     'Dies Rusak',
-        //                                     'Mesin Trouble Operator',
-        //                                     'Validasi QC',
-        //                                     'Mesin Trouble Maintenance',
-        //                                 ],
-        //                         datasets:[
-        //                                     {
-        //                                         label:'Downtimes',
-        //                                         backgroundColor:'rgba(60,141,188,0.9)',
-        //                                         borderColor:'rgba(60,141,188,0.8)',
-        //                                         pointRadius:false,
-        //                                         pointColor:'#3b8bba',
-        //                                         pointStrokeColor:'rgba(60,141,188,1)',
-        //                                         pointHighlightFill:'#fff',
-        //                                         pointHighlightStroke:'rgba(60,141,188,1)',
-        //                                         data: response
-        //                                     },
-        //                                 ]
-        //                     }
-        //         var salesChartOptions=  {
-        //                                     maintainAspectRatio:false,
-        //                                     responsive:true,
-        //                                     legend:{display:false},
-        //                                     scales:{xAxes:[{gridLines:{display:false}}],
-        //                                     yAxes:[{gridLines:{display:false}}]}
-        //                                 }
-        //         var salesChart= new Chart(salesChartCanvas,{type:'bar',data:salesChartData,options:salesChartOptions});
-        //     }
-        // });
-
-        // $.ajax({
-        //     type: "POST",
-        //     dataType: "json", 
-        //     url: "{{route('workorder.getOee')}}",
-        //     data: {
-        //         workorder_id:'{{$workorder->id}}',
-        //         _token: '{{csrf_token()}}'
-        //     },
-        //     success: function(response) {
-        //         var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
-        //         var pieData=    {
-        //                             labels:['OEE','Waste'],
-        //                             datasets:[
-        //                                         {
-        //                                             data:[response[0],100-response[0]],
-        //                                             // data:[response[0],100-response[0]],
-        //                                             backgroundColor:['#00a65a','#f56954']
-        //                                         }
-        //                                     ]
-        //                         }
-        //         var pieOptions= {
-        //                             legend:{display:false},
-        //                             maintainAspectRatio:false,
-        //                             responsive:true
-        //                         }
-        //         var pieChart=new Chart(pieChartCanvas,{type:'doughnut',data:pieData,options:pieOptions})
-        //     }
-        // });
-
         $('#print-label').on('click',function(){
             event.preventDefault();
             window.open("{{url('/report/'.$workorder->id.'/printToPdf')}}");
@@ -864,7 +761,7 @@
                     _token: '{{csrf_token()}}'
                 },
                 success:function(response){
-                    console.log(response);
+                    // console.log(response);
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -881,7 +778,7 @@
                         title: 'Something Went Wrong',
                         html: '<b class="text-danger">'+JSON.parse(response.responseText).message + '</b> <br><br> <B>detail</b>: ' + response.responseText,
                         showConfirmButton: false,
-                        timer: 2000
+                        // timer: 2000
                     });
                 }
             });

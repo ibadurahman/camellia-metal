@@ -38,7 +38,11 @@ class WorkorderRequest extends FormRequest
             'wo_number'             =>['required',$rule_wo_unique,],
             'bb_supplier'           =>['required'],
             'bb_grade'              =>['required'],
+<<<<<<< HEAD
             'bb_diameter'           =>['required','numeric', new diameterDifferenceRule($supplierDiameter,$customerDiameter) ],
+=======
+            'bb_diameter'           =>['required','numeric', new diameterDifferenceRule($supplierDiameter,$customerDiameter)],
+>>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
             'bb_qty_pcs'            =>['required','numeric'],
             'bb_qty_coil'           =>['required','numeric'],
             'fg_customer'           =>['required'],
