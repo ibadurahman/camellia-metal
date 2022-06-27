@@ -157,7 +157,8 @@
                 </div>
             </div>
         </div><!-- /.container-fluid -->
-    </section>
+    </section>    
+
     <!-- /.content -->  
 @endsection
 
@@ -376,7 +377,7 @@
             url:'{{route('realtime.ajaxRequest')}}',
                 dataType:'json',
             success:function(response){
-                document.getElementById('counterVal').innerHTML = response.counter +'<sup style="font-size: 20px">MPM</sup>';
+                document.getElementById('counterVal').innerHTML = response.counter +'<sup style="font-size: 20px">Pcs</sup>';
                 $('.counter').hide();
             }
         });
@@ -436,3 +437,6 @@
     
 </script>
 @endpush
+
+
+

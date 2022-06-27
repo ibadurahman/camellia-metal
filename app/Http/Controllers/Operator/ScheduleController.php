@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Operator;
 
+use App\Models\User;
 use App\Models\Workorder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -91,6 +92,16 @@ class ScheduleController extends Controller
                 return $model->machine->name;
             })
             ->addColumn('smelting','operator.schedule.smelting')
+            ->addColumn('created_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->created_at));
+            })
+            ->addColumn('updated_by',function(Workorder $model){
+                $user = User::where('id',$model->edited_by)->first();
+                return $user->name;
+            })
+            ->addColumn('updated_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->updated_at));
+            })
             ->addColumn('action','operator.schedule.action')
             ->rawColumns(['smelting','action'])
             ->setRowClass(function(){
@@ -155,6 +166,16 @@ class ScheduleController extends Controller
             ->addColumn('machine',function(Workorder $model){
                 return $model->machine->name;
             })
+            ->addColumn('created_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->created_at));
+            })
+            ->addColumn('updated_by',function(Workorder $model){
+                $user = User::where('id',$model->edited_by)->first();
+                return $user->name;
+            })
+            ->addColumn('updated_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->updated_at));
+            })
             ->setRowId(function(Workorder $model){
                 return $model->id;
             })
@@ -169,7 +190,7 @@ class ScheduleController extends Controller
         {
             return redirect(route('schedule.index'));
         }   
-
+        $id->timestamps = false;
         $id->update(['status_wo'=>'on process','wo_order_num'=>null]);
 
         return redirect(route('schedule.index'));

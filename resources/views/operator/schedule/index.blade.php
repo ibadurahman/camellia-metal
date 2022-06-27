@@ -28,7 +28,7 @@
                                         <th>Supplier</th>
                                         <th>Grade</th>
                                         <th>Diameter (mm)</th>
-                                        <th>Qty (kg / coil)</th>
+                                        <th>Qty (kg / Bundle)</th>
                                         <th>Customer</th>
                                         <th>Straightness Std (mm)</th>
                                         <th>Size (mm x mm)</th>
@@ -42,6 +42,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                         <th>Leburan</th>
                                         <th>Action</th>
                                     </tr>
@@ -67,7 +69,7 @@
                                         <th>BB Supplier</th>
                                         <th>BB Grade</th>
                                         <th>BB Diameter (mm)</th>
-                                        <th>BB Qty (Kg / Coil)</th>
+                                        <th>BB Qty (Kg / Bundle)</th>
                                         <th>FG Customer</th>
                                         <th>FG Straightness Std (mm)</th>
                                         <th>FG Size (mm x mm)</th>
@@ -80,6 +82,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -123,6 +127,8 @@
                 {data:'machine'},
                 {data:'user'},  
                 {data:'created_at'},
+                {data:'updated_by'},
+                {data:'updated_at'},
                 {data:'smelting'},
                 {data:'action'}
             ],
@@ -159,6 +165,8 @@
                 {data:'machine'},
                 {data:'user'},  
                 {data:'created_at'},
+                {data:'updated_by'},
+                {data:'updated_at'},
             ],
             "paging": false,
             "lengthChange": true,

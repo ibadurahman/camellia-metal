@@ -53,11 +53,22 @@ class RealtimeController extends Controller
             ]);
         }
 
-        $data = json_decode(Realtime::select('speed','created_at')->where('workorder_id',$woId['id'])->orderBy('created_at','desc')->limit(20)->get());
+        $predata = Realtime::select('speed','created_at')->where('workorder_id',$woId['id'])->orderBy('created_at','desc')->limit(20)->get();
+        $j = 0;
+        for ($i=count($predata); $i > 0 ; $i--) { 
+            $predata2[$j] = $predata[$i-1];
+            $j++;
+        }
+        // $data = json_decode($predata2);
         $response = [
-            'speed'         => array_column($data,'speed'),
-            'created_at'    => array_column($data,'created_at')
+            'speed'         => array_column($predata2,'speed'),
+            'created_at'    => array_column($predata2,'created_at')
         ];
+        
+        for ($i=0; $i < count($response['created_at']); $i++) { 
+            // dd($response['created_at'][$i]);
+            $response['created_at'][$i] = date('Y-m-d H:i:s',strtotime($response['created_at'][$i]));
+        }
         return response()->json($response);
         // return response()->json([
         //     'speed'     => $data->speed,
@@ -98,6 +109,10 @@ class RealtimeController extends Controller
             'speed' => array_column($data,'speed'),
             'created_at'    => array_column($data,'created_at')
         ];
+        for ($i=0; $i < count($response['created_at']); $i++) { 
+            // dd($response['created_at'][$i]);
+            $response['created_at'][$i] = date('Y-m-d H:i:s',strtotime($response['created_at'][$i]));
+        }
         return response()->json($response);
     }
 

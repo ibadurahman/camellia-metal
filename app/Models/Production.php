@@ -28,11 +28,17 @@ class Production extends Model
         'pcs_per_bundle',
         'bundle_judgement',
         'visual',
+        'user_id',
+        'edited_by'
     ];
 
     public function workorder()
     {
         return $this->belongsTo(Workorder::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

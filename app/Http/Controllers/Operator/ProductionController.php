@@ -10,7 +10,9 @@ use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Requests\OeeRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductionRequest;
+use App\Models\DailyReport;
 
 class ProductionController extends Controller
 {
@@ -29,6 +31,7 @@ class ProductionController extends Controller
         }
         $productions = Production::where('workorder_id',$workorder->id)->get();
         $user       = User::where('id',$workorder->user_id)->first();
+        $lastEdit   = User::where('id',$workorder->edited_by)->first();
         $smeltings  = Smelting::where('workorder_id',$workorder->id)->orderBy('bundle_num','ASC')->get();
         $smeltingInputList = [];
         foreach ($smeltings as $smelting) 
@@ -44,6 +47,7 @@ class ProductionController extends Controller
             'title'=>'Production Report',
             'workorder' => $workorder,
             'createdBy' => $user,
+            'updatedBy' => $lastEdit,
             'smeltings' => $smeltings,
             'productions'   => $productions,
             'smeltingInputList'  => $smeltingInputList,
@@ -93,6 +97,7 @@ class ProductionController extends Controller
                 'message' => 'Data Already Input'
             ],400);
         }
+        
         $production = Production::create([
             'workorder_id'      => $request->workorder_id,
             'bundle_num'        => $request->bundle_num,
@@ -105,7 +110,9 @@ class ProductionController extends Controller
             'berat_fg'          => $request->berat_fg,
             'pcs_per_bundle'    => $request->pcs_per_bundle,
             'bundle_judgement'  => $request->bundle_judgement,
-            'visual'            => $request->visual
+            'visual'            => $request->visual,
+            'user_id'           => Auth::user()->id,
+            'edited_by'         => Auth::user()->id,
         ]);
 
         $smeltingData = Smelting::select('id')->where('workorder_id',$workorder->id)->get();
@@ -114,7 +121,38 @@ class ProductionController extends Controller
         $productionNum = count($productionData);
         $oeeData        = Oee::select('id')->where('workorder_id',$workorder->id)->first();
         if($smeltingNum == $productionNum && $oeeData != null){
-            Workorder::where('id',$workorder->id)->update(['status_wo'=>'closed']);
+            $updateWO = Workorder::where('id',$workorder->id)->first();
+            $updateWO->timestamps = false;
+            $updateWO->update(['status_wo'=>'closed']);
+
+            $oees = Oee::where('workorder_id',$workorder->id)->first();
+            $totalGoodProduct = 0;
+            $totalBadProduct  = 0;
+            $totalWeightFg    = 0;
+
+            $productions = Production::where('workorder_id',$workorder->id)->get();
+            $goodProduct = Production::where('workorder_id',$workorder->id)->where('bundle_judgement',1)->get();
+            $BadProduct = Production::where('workorder_id',$workorder->id)->where('bundle_judgement',0)->get();
+            foreach ($goodProduct as $prod) {
+                $totalGoodProduct += $prod->pcs_per_bundle;
+            }
+            foreach ($BadProduct as $prod) {
+                $totalBadProduct += $prod->pcs_per_bundle;
+            }
+            foreach ($productions as $prod) {
+                $totalWeightFg += $prod->berat_fg;
+            }
+            DailyReport::create([
+                'workorder_id'      => $workorder->id,
+                'total_runtime'     => $oees->total_runtime,
+                'total_downtime'    => $oees->total_downtime,
+                'total_pcs'         => $totalBadProduct + $totalGoodProduct,
+                'total_pcs_good'    => $totalGoodProduct,
+                'total_pcs_bad'     => $totalBadProduct,
+                'total_weight_fg'   => $totalWeightFg,
+                'total_weight_bb'   => $workorder->bb_qty_pcs
+            ]);
+            
         }
 
         return response()->json([
@@ -174,7 +212,37 @@ class ProductionController extends Controller
         $productionNum = count($productionData);
         $oeeData        = Oee::select('id')->where('workorder_id',$workorder->id)->first();
         if($smeltingNum == $productionNum && $oeeData != null){
-            Workorder::where('id',$workorder->id)->update(['status_wo'=>'closed']);
+            $updateWO = Workorder::where('id',$workorder->id)->first();
+            $updateWO->timestamps = false;
+            $updateWO->update(['status_wo'=>'closed']);
+
+            $oees = Oee::where('workorder_id',$workorder->id)->first();
+            $totalGoodProduct = 0;
+            $totalBadProduct  = 0;
+            $totalWeightFg    = 0;
+
+            $productions = Production::where('workorder_id',$workorder->id)->get();
+            $goodProduct = Production::where('workorder_id',$workorder->id)->where('bundle_judgement',1)->get();
+            $BadProduct = Production::where('workorder_id',$workorder->id)->where('bundle_judgement',0)->get();
+            foreach ($goodProduct as $prod) {
+                $totalGoodProduct += $prod->pcs_per_bundle;
+            }
+            foreach ($BadProduct as $prod) {
+                $totalBadProduct += $prod->pcs_per_bundle;
+            }
+            foreach ($productions as $prod) {
+                $totalWeightFg += $prod->berat_fg;
+            }
+            DailyReport::create([
+                'workorder_id'      => $workorder->id,
+                'total_runtime'     => $oees->total_runtime,
+                'total_downtime'    => $oees->total_downtime,
+                'total_pcs'         => $totalBadProduct + $totalGoodProduct,
+                'total_pcs_good'    => $totalGoodProduct,
+                'total_pcs_bad'     => $totalBadProduct,
+                'total_weight_fg'   => $totalWeightFg,
+                'total_weight_bb'   => $workorder->bb_qty_pcs
+            ]);
         }
 
         return response()->json([

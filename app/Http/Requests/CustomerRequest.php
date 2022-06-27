@@ -37,7 +37,7 @@ class CustomerRequest extends FormRequest
             'size_1'                => ['required','numeric'],
             'size_2'                => ['required','numeric'],
             'shape'                 => ['required'],
-            'straightness_standard' => ['required','numeric']
+            'straightness_standard' => ['required']
         ];
     }
 

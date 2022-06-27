@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Workorder::class);
     }
+
+    public function productions()
+    {
+        return $this->hasMany(Production::class);
+    }
 }

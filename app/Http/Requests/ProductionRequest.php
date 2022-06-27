@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\qualityJudgementRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductionRequest extends FormRequest
@@ -23,6 +24,9 @@ class ProductionRequest extends FormRequest
      */
     public function rules()
     {
+        $qualityJudgement = $this->request->get('bundle_judgement');
+        $qualityNgJudgement = $this->request->get('visual');
+
         return [
             //
             'workorder_id'      =>['required'],
@@ -35,8 +39,8 @@ class ProductionRequest extends FormRequest
             'panjang_aktual'    =>['required'],
             'berat_fg'          =>['required'],
             'pcs_per_bundle'    =>['required'],
-            'bundle_judgement'  =>['required'],
-            'visual'            =>['required'],
+            'bundle_judgement'  =>['required', new qualityJudgementRule($qualityJudgement,$qualityNgJudgement)],
+            'visual'            =>['required', new qualityJudgementRule($qualityJudgement,$qualityNgJudgement)],
         ];
     }
 

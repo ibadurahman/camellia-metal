@@ -38,6 +38,8 @@
                                         <th>Machine</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
+                                        <th>Last Edited By</th>
+                                        <th>Last Edited At</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -82,6 +84,8 @@
             {data:'machine'},
             {data:'user'},  
             {data:'created_at'},
+            {data:'updated_by'},
+            {data:'updated_at'},
         ],
         "paging": false,
         "lengthChange": true,

@@ -38,6 +38,8 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Total Pcs (Pcs)</span>
                                             <span class="info-box-number text-center text-muted mb-0" id="total_pcs">0</span>
+                                            <span class="text-left text-muted mb-0" id="total_pcs_good">Good: 0</span>
+                                            <span class="text-left text-muted mb-0" id="total_pcs_bad">Bad: 0</span>
                                         </div>
                                     </div>
                                 </div>
@@ -59,14 +61,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Average Speed (min)</span>
-                                            <span class="info-box-number text-center text-muted mb-0" id="average_speed">0</span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div> 
                     </div>   
@@ -81,6 +75,7 @@
                         </div>
                         <div class="card-body">
                             <form method="POST" id="search-form" class="form-inline" role="form">
+                                @csrf
                                 <div class="form-group">
                                     <label style="padding-right: 10px ">Search Data From : </label>
                                     <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
@@ -109,10 +104,11 @@
                                         <th>Report Date</th>
                                         <th>Total Runtime</th>
                                         <th>Total Downtime</th>
-                                        <th>Total Pcs</th>
+                                        <th>Total Production (Pcs)</th>
+                                        <th>Total Good (Pcs)</th>
+                                        <th>Total Bad (Pcs)</th>
                                         <th>Total Weight FG</th>
                                         <th>Total Weight BB</th>
-                                        <th>Average Speed</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -150,13 +146,15 @@
         },
         columns: [
             {data:'DT_RowIndex',orderable:false, searchable:false},
-            {data: 'report_date'},
+            {data: 'created_at'},
             {data: 'total_runtime'},
             {data: 'total_downtime'},
             {data: 'total_pcs'},
+            {data: 'total_pcs_good'},
+            {data: 'total_pcs_bad'},
             {data: 'total_weight_fg'},
             {data: 'total_weight_bb'},
-            {data: 'average_speed'}
+            // {data: 'average_speed'}
         ],
         "paging": true,
         "lengthChange": true,
@@ -168,8 +166,10 @@
     });
 
     $('#search-form').on('submit', function(e) {
-        oTable.draw();
         e.preventDefault();
+        oTable.draw();
+        calculateSearch();
+    
     });
 
     function calculateSearch(){
@@ -183,12 +183,14 @@
             },
             dataType:'json',
             success:function(response){
+                console.log(response);
                 $('#total_runtime').html(response.total_runtime);
                 $('#total_downtime').html(response.total_downtime);
                 $('#total_pcs').html(response.total_pcs);
+                $('#total_pcs_good').html("Good: " + response.total_pcs_good);
+                $('#total_pcs_bad').html("Bad: " + response.total_pcs_bad);
                 $('#total_weight_fg').html(response.total_weight_fg);
                 $('#total_weight_bb').html(response.total_weight_bb);
-                $('#average_speed').html(response.average_speed);
             }
         });
     }
