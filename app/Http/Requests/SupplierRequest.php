@@ -35,7 +35,7 @@ class SupplierRequest extends FormRequest
             //
             'name'      => ['required',$rule_supplier_unique],
             'grade'     => ['required'],
-            'diameter'  => ['required'],
+            'diameter'  => ['required','numeric'],
             'qty_kg'    => ['required','numeric'],
             'qty_coil'  => ['required','numeric']
         ];

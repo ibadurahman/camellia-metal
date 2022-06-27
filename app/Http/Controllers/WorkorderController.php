@@ -26,7 +26,7 @@ class WorkorderController extends Controller
 
     public function ajaxRequestAll(Request $request)
     {
-        $workorder = Workorder::query();
+        $workorder = Workorder::query()->orderby('created_at','desc');
         
         return datatables()->of($workorder)
                 ->filter(function($query) use ($request){
@@ -72,6 +72,9 @@ class WorkorderController extends Controller
                         return 'No Data';
                     }
                     return $oee->total_downtime;
+                })
+                ->addColumn('created_at',function(Workorder $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
                 })
                 // ->addColumn('status_prod',function(Workorder $model){
                 //     if($model->status_prod == 1){
@@ -132,30 +135,7 @@ class WorkorderController extends Controller
         
     }
 
-    public function getOee(Request $request)
-    {
-
-        $oee = Oee::where('workorder_id',$request->workorder_id)->first();
-        $productions = Production::where('workorder_id',$request->workorder_id)->get();
-        $totalProductions = 0;
-        foreach($productions as $prod)
-        {
-            $totalProductions += $prod->pcs_per_bundle;
-        }
-        $totalProductions = 2000;
-        $oeeResult = [0,0,0,0];
-        if ($totalProductions > 0) {
-            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $totalProductions, 3);
-        }
-        
-        $oee = Oee::where('workorder_id',$request->workorder_id)->first();
-        return response()->json([
-            $oeeResult[0],
-            $oeeResult[1],
-            $oeeResult[2],
-            $oeeResult[3],
-        ],200);
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -176,6 +156,32 @@ class WorkorderController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function getOee(Request $request)
+    {
+
+        $oee = Oee::where('workorder_id',$request->workorder_id)->first();
+        $workorder = Workorder::where('id',$request->workorder_id)->first();
+        $productions = Production::where('workorder_id',$request->workorder_id)->get();
+        $totalProductions = 0;
+        foreach($productions as $prod)
+        {
+            $totalProductions += $prod->pcs_per_bundle;
+        }
+        $smeltings      = Smelting::where('workorder_id',$request->workorder_id)->get();
+        $oeeResult = [0,0,0,0];
+        if ($oee && $totalProductions > 0) {
+            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $workorder->fg_qty_pcs*count($smeltings), $totalProductions, 3);
+        }
+        
+        $oee = Oee::where('workorder_id',$request->workorder_id)->first();
+        return response()->json([
+            $oeeResult[0],
+            $oeeResult[1],
+            $oeeResult[2],
+            $oeeResult[3],
+        ],200);
     }
 
     /**
@@ -200,7 +206,7 @@ class WorkorderController extends Controller
 
         $oeeResult          = [0,0,0,0];
         if ($oee && $totalProductions>0) {
-            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $totalProductions, 3);
+            $oeeResult      = $this->calculateOee($oee->total_downtime, $oee->dt_istirahat, $oee->total_runtime, $workorder->fg_qty_pcs*count($smeltings), $totalProductions, 3);
         }
 
         return view('user.workorder.details',[
@@ -218,12 +224,12 @@ class WorkorderController extends Controller
         ]);
     }
 
-    private function calculateOee(int $downtime, int $dt_istirahat, int $runtime, int $qtyProduction, int $cycleTime, int $defect = 0)
+    private function calculateOee(int $downtime, int $dt_istirahat, int $runtime, int $qtyProduction, int $planQtyProduction, int $cycleTime, int $defect = 0)
     {
         $otr    = round((($runtime - ($downtime-$dt_istirahat)) / $runtime) * 100,2);
-        $per    = round(($qtyProduction/(($runtime-($downtime-$dt_istirahat))*60/$cycleTime))*100,2);
+        $per    = round(($qtyProduction/$planQtyProduction)*100,2);
         $qr     = round((($qtyProduction - $defect)/$qtyProduction)*100,2);
-        $oeeVal = round((($otr/100) * ($per/100) * ($qr/100))*100,2);
+        $oeeVal = round(($otr+$per+$qr)/3,2);
         $result = [
             $oeeVal, $otr, $per, $qr
         ];

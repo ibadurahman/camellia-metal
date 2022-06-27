@@ -23,7 +23,7 @@
                                             @if (!$oee)
                                                 <span class="info-box-number text-center text-muted mb-0">0</span>
                                             @else
-                                                <span class="info-box-number text-center text-muted mb-0">{{$oee->total_runtime}}</span>
+                                                <span class="info-box-number text-center text-muted mb-0">{{$oee->total_runtime}} min</span>
                                             @endif
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
                                             @if (!$oee)
                                                 <span class="info-box-number text-center text-muted mb-0">0</span>
                                             @else
-                                                <span class="info-box-number text-center text-muted mb-0">{{$oee->total_downtime}}</span>
+                                                <span class="info-box-number text-center text-muted mb-0">{{$oee->total_downtime}} min</span>
                                             @endif
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Total Production</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{$totalProduction}}</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{$totalProduction}} Pcs</span>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                     <p href="" class="text-secondary"> Diameter: {{$workorder->bb_diameter}} mm</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Qty/Coil: {{$workorder->bb_qty_pcs}} Pcs / {{$workorder->bb_qty_coil}} Pcs</p>
+                                    <p href="" class="text-secondary"> Qty/Bundle: {{$workorder->bb_qty_pcs}} Kg / {{$workorder->bb_qty_coil}} Bundle</p>
                                 </li>
                             </ul>
                             <h5 class="mt-5 text-muted">Finish Good</h5>
@@ -287,7 +287,7 @@
                                     <p href="" class="text-secondary"> Size: {{$workorder->fg_size_1}} mm X {{$workorder->fg_size_2}} mm</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} %</p>
+                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} mm</p>
                                 </li>
                                 <li>
                                     <p href="" class="text-secondary"> Reduction Rate: {{$workorder->fg_reduction_rate}} %</p>
@@ -296,7 +296,7 @@
                                     <p href="" class="text-secondary"> Shape: {{$workorder->fg_shape}}</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Qty: {{$workorder->fg_qty}} Pcs</p>
+                                    <p href="" class="text-secondary"> Qty Pcs per Bundle: {{$workorder->fg_qty_pcs}} Pcs</p>
                                 </li>
                             </ul>
                             <h5 class="mt-5 text-muted">Others</h5>
@@ -440,6 +440,7 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
+                console.log(response);
                 var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
                 var pieData=    {
                                     labels:['OEE','Waste'],

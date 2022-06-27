@@ -75,13 +75,13 @@
                                             <label for="">Kg</label>
                                         </div>
                                         <div class="col-5">
-                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="(Bahan Baku) Qty COIL" value="{{$workorder->bb_qty_coil ?? old('bb_qty_coil')}}">
+                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="(Bahan Baku) Qty Bundle" value="{{$workorder->bb_qty_coil ?? old('bb_qty_coil')}}">
                                             @error('bb_qty_coil')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
                                         </div>
                                         <div class="col-1">
-                                            <label for="">Coil</label>
+                                            <label for="">Bundle</label>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Reduction Rate</label>
+                                    <label for="">Reduction Rate (%)</label>
                                     <input id="customer-reduc-rate" name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="(Finish Good) Reduction Rate" value="{{$workorder->fg_reduction_rate ?? old('fg_reduction_rate')}}">
                                     @error('fg_reduction_rate')
                                         <span class="text-danger help-block">{{$message}}</span>

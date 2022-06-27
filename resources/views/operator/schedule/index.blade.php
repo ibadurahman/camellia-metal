@@ -28,7 +28,7 @@
                                         <th>Supplier</th>
                                         <th>Grade</th>
                                         <th>Diameter (mm)</th>
-                                        <th>Qty (kg / coil)</th>
+                                        <th>Qty (kg / Bundle)</th>
                                         <th>Customer</th>
                                         <th>Straightness Std (mm)</th>
                                         <th>Size (mm x mm)</th>
@@ -67,7 +67,7 @@
                                         <th>BB Supplier</th>
                                         <th>BB Grade</th>
                                         <th>BB Diameter (mm)</th>
-                                        <th>BB Qty (Kg / Coil)</th>
+                                        <th>BB Qty (Kg / Bundle)</th>
                                         <th>FG Customer</th>
                                         <th>FG Straightness Std (mm)</th>
                                         <th>FG Size (mm x mm)</th>

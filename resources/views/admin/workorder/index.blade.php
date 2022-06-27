@@ -28,7 +28,7 @@
                                         <th>Supplier</th>
                                         <th>Grade</th>
                                         <th>Diameter (mm)</th>
-                                        <th>Qty (kg / coil)</th>
+                                        <th>Qty (kg / bundle)</th>
                                         <th>Customer</th>
                                         <th>Straightness Std (mm)</th>
                                         <th>Size (mm x mm)</th>

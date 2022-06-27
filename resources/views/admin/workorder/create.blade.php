@@ -47,9 +47,10 @@
                                     @error('bb_diameter')
                                         <span class="text-danger help-block">{{$message}}</span>
                                     @enderror
+                                    <div id="diameter-difference-warning-supplier"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Quantity (Kg / Coil)</label>
+                                    <label for="">Quantity (Kg / Bundle)</label>
                                     <div class="row">
                                         <div class="col-5">
                                             <input id="supplier-qty-kg" name="bb_qty_pcs" type="text" class="form-control @error('bb_qty_pcs') is-invalid @enderror" placeholder="Qty (Kg)" value="{{old('bb_qty_pcs')}}">
@@ -61,13 +62,13 @@
                                             <label for="">Kg</label>
                                         </div>
                                         <div class="col-5">
-                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="Qty (Coil)" value="{{old('bb_qty_coil')}}">
+                                            <input id="supplier-qty-coil" name="bb_qty_coil" type="text" class="form-control @error('bb_qty_coil') is-invalid @enderror" placeholder="Qty (Bundle)" value="{{old('bb_qty_coil')}}">
                                             @error('bb_qty_coil')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
                                         </div>
                                         <div class="col-1">
-                                            <label for="">Coil</label>
+                                            <label for="">Bundle</label>
                                         </div>
                                     </div>
                                 </div>
@@ -101,6 +102,7 @@
                                             @error('fg_size_1')
                                                 <span class="text-danger help-block">{{$message}}</span>
                                             @enderror
+                                            <div id="diameter-difference-warning-customer"></div>
                                         </div>
                                         <div class="col-1">
                                             <label class="right" for="">X</label>
@@ -124,7 +126,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Reduction Rate (mm)</label>
+                                    <label for="">Reduction Rate (%)</label>
                                     <input id="customer-reduc-rate" name="fg_reduction_rate" type="text" class="form-control @error('fg_reduction_rate') is-invalid @enderror" placeholder="Reduction Rate (%)" value="{{old('fg_reduction_rate')}}">
                                     @error('fg_reduction_rate')
                                         <span class="text-danger help-block">{{$message}}</span>
@@ -198,9 +200,11 @@
             });
             $('#customer-size-1').on('keyup',function(){
                 recalculate();
+                checkDiameterDifference();
             });
             $('#supplier-diameter').on('keyup',function(){
                 recalculate();
+                checkDiameterDifference();
             });
             $('#kg-per-bundle').on('keyup',function(){
                 recalculate();
@@ -259,6 +263,25 @@
                     }
                 });
             });
+
+            function checkDiameterDifference()
+            {
+                // var diff  = $('#supplier-diameter').val() - $('#customer-size-1').val();
+                // if(Math.abs(diff) > 3)
+                // {
+                //     $('#supplier-diameter').addClass('')
+                //     $('#diameter-difference-warning-supplier').html(
+                //         '<span class="text-danger help-block">Diameter difference more than 3 mm</span>'
+                //     )
+                //     $('#diameter-difference-warning-customer').html(
+                //         '<span class="text-danger help-block">Diameter difference more than 3 mm</span>'
+                //     )
+                //     return;
+                // }
+                // $('#diameter-difference-warning-supplier').html('');
+                // $('#diameter-difference-warning-customer').html('');
+
+            }
 
             function recalculate()
             {

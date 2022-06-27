@@ -66,6 +66,9 @@ class DataController extends Controller
                 })
                 ->addColumn('action','admin.workorder.action')
                 ->addColumn('smelting','admin.workorder.smelting')
+                ->addColumn('created_at',function(Workorder $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
+                })
                 ->rawColumns(['smelting','action'])
                 ->setRowClass(function(){
                     return 'workorder-row';
@@ -132,6 +135,9 @@ class DataController extends Controller
                 })
                 ->addColumn('action','admin.workorder.action')
                 ->addColumn('smelting','admin.workorder.smelting')
+                ->addColumn('created_at',function(Workorder $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
+                })
                 ->rawColumns(['smelting','action'])
                 ->setRowClass(function(){
                     return 'workorder-row';
@@ -190,6 +196,9 @@ class DataController extends Controller
                     $combines = '-' . $model->tolerance_minus;
                     return $combines;
                 })
+                ->addColumn('created_at',function(Workorder $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
+                })
                 ->addColumn('user',function(Workorder $model){
                     return $model->user->name;
                 })
@@ -240,6 +249,9 @@ class DataController extends Controller
                 ->addColumn('machine',function(Workorder $model){
                     return $model->machine->name;
                 })
+                ->addColumn('created_at',function(Workorder $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
+                })
                 ->setRowId(function(Workorder $model){
                     return $model->id;
                 })
@@ -253,6 +265,7 @@ class DataController extends Controller
         return datatables()->of($suppliers)
                 ->addIndexColumn()
                 ->addColumn('action','admin.supplier.action')
+                
                 ->toJson();
     }
 
@@ -291,6 +304,9 @@ class DataController extends Controller
                     $smelting = Smelting::select('smelting_num')->where('workorder_id',$model->workorder_id)->where('bundle_num',$model->bundle_num)->first();
                     return $smelting['smelting_num'];
                 })
+                ->addColumn('created_at',function(Production $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
+                })
                 ->addIndexColumn()
                 ->toJson();
     }
@@ -302,6 +318,9 @@ class DataController extends Controller
         return datatables()->of($smeltings)
                 ->addColumn('wo_number',function(Smelting $model){
                     return $model->workorder->wo_number;
+                })
+                ->addColumn('created_at',function(Smelting $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
                 })
                 ->addColumn('action','admin.smelting.action')
                 ->addIndexColumn()
@@ -315,6 +334,9 @@ class DataController extends Controller
         return datatables()->of($productions)
                 ->addColumn('wo_number',function(Oee $model){
                     return $model->workorder->wo_number;
+                })
+                ->addColumn('created_at',function(Oee $model){
+                    return date('Y-m-d H:i:s',strtotime($model->created_at));
                 })
                 ->addIndexColumn()
                 ->toJson();

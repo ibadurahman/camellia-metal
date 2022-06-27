@@ -91,6 +91,9 @@ class ScheduleController extends Controller
                 return $model->machine->name;
             })
             ->addColumn('smelting','operator.schedule.smelting')
+            ->addColumn('created_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->created_at));
+            })
             ->addColumn('action','operator.schedule.action')
             ->rawColumns(['smelting','action'])
             ->setRowClass(function(){
@@ -154,6 +157,9 @@ class ScheduleController extends Controller
             })
             ->addColumn('machine',function(Workorder $model){
                 return $model->machine->name;
+            })
+            ->addColumn('created_at',function(Workorder $model){
+                return date('Y-m-d H:i:s',strtotime($model->created_at));
             })
             ->setRowId(function(Workorder $model){
                 return $model->id;

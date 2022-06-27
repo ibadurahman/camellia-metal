@@ -547,7 +547,7 @@
                                     <p href="" class="text-secondary"> Diameter: {{$workorder->bb_diameter}} mm</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Qty/Coil: {{$workorder->bb_qty_pcs}} Pcs / {{$workorder->bb_qty_coil}} Pcs</p>
+                                    <p href="" class="text-secondary"> Qty/Bundle: {{$workorder->bb_qty_pcs}} Kg / {{$workorder->bb_qty_coil}} Bundle</p>
                                 </li>
                             </ul>
                             <h5 class="mt-5 text-muted">Finish Good</h5>
@@ -556,7 +556,7 @@
                                     <p href="" class="text-secondary"> Size: {{$workorder->fg_size_1}} mm X {{$workorder->fg_size_2}} mm</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} %</p>
+                                    <p href="" class="text-secondary"> Tolerance: {{$workorder->tolerance_minus}} mm</p>
                                 </li>
                                 <li>
                                     <p href="" class="text-secondary"> Reduction Rate: {{$workorder->fg_reduction_rate}} %</p>
@@ -565,7 +565,7 @@
                                     <p href="" class="text-secondary"> Shape: {{$workorder->fg_shape}}</p>
                                 </li>
                                 <li>
-                                    <p href="" class="text-secondary"> Qty: {{$workorder->fg_qty}} Pcs</p>
+                                    <p href="" class="text-secondary"> Qty: {{$workorder->fg_qty_pcs}} Pcs</p>
                                 </li>
                             </ul>
                             <h5 class="mt-5 text-muted">Others</h5>
