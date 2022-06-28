@@ -408,6 +408,9 @@
                                             '<p class="text-sm">Created By'+
                                                 '<b class="d-block">'+response.createdBy+'</b>'+
                                             '</p>'+
+                                            '<p class="text-sm">Size'+
+                                                '<b class="d-block">'+response.diameter+ ' mm x ' +response.length+' mm</b>'+
+                                            '</p>'+
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+

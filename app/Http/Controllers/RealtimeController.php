@@ -88,7 +88,9 @@ class RealtimeController extends Controller
             'wo_number'     => $data['wo_number'],
             'createdBy'     => $data->user->name,
             'customer'      => $data['fg_customer'],
-            'machine'       => $data->machine->name
+            'machine'       => $data->machine->name,
+            'diameter'      => $data['fg_size_1'],
+            'length'        => $data['fg_size_2']
         ],200);
     }
 
