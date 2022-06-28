@@ -45,12 +45,9 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Total Production</span>
                                             <span class="info-box-number text-center text-muted mb-0">{{$totalProduction}} Pcs</span>
-<<<<<<< HEAD
-=======
                                             <span class="text-left text-muted mb-0"><b>Good:</b> {{$totalGoodProduction}} Pcs</span>
                                             <span class="text-left text-muted mb-0"><b>Bad:</b> {{$totalBadProduction}} Pcs</span>
 
->>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
                                         </div>
                                     </div>
                                 </div>
@@ -448,11 +445,7 @@
                 _token: '{{csrf_token()}}'
             },
             success: function(response) {
-<<<<<<< HEAD
-                console.log(response);
-=======
                 // console.log(response);
->>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
                 var pieChartCanvas = $('#oee-chart-canvas').get(0).getContext("2d");
                 var pieData=    {
                                     labels:['OEE','Waste'],

@@ -95,8 +95,6 @@ class ScheduleController extends Controller
             ->addColumn('created_at',function(Workorder $model){
                 return date('Y-m-d H:i:s',strtotime($model->created_at));
             })
-<<<<<<< HEAD
-=======
             ->addColumn('updated_by',function(Workorder $model){
                 $user = User::where('id',$model->edited_by)->first();
                 return $user->name;
@@ -104,7 +102,6 @@ class ScheduleController extends Controller
             ->addColumn('updated_at',function(Workorder $model){
                 return date('Y-m-d H:i:s',strtotime($model->updated_at));
             })
->>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
             ->addColumn('action','operator.schedule.action')
             ->rawColumns(['smelting','action'])
             ->setRowClass(function(){
@@ -172,8 +169,6 @@ class ScheduleController extends Controller
             ->addColumn('created_at',function(Workorder $model){
                 return date('Y-m-d H:i:s',strtotime($model->created_at));
             })
-<<<<<<< HEAD
-=======
             ->addColumn('updated_by',function(Workorder $model){
                 $user = User::where('id',$model->edited_by)->first();
                 return $user->name;
@@ -181,7 +176,6 @@ class ScheduleController extends Controller
             ->addColumn('updated_at',function(Workorder $model){
                 return date('Y-m-d H:i:s',strtotime($model->updated_at));
             })
->>>>>>> 09390d398a721377b295ee29a39fb6f4382eb011
             ->setRowId(function(Workorder $model){
                 return $model->id;
             })
