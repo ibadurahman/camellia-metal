@@ -236,8 +236,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="">Bundle Judgement</label>
-                                                        <select name="bundle-judgement" id="" class="form-control @error('bundle-judgement') is-invalid @enderror">
-                                                            <option value="">-- Select Judgement --</option>
+                                                        <select name="bundle-judgement" id="judgement-select" class="form-control @error('bundle-judgement') is-invalid @enderror">
+                                                            <option disabled selected value="">-- Select Judgement --</option>
                                                             <option value="1">Good</option>
                                                             <option value="0">Not Good</option>
                                                         </select>
@@ -247,47 +247,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="">Visual</label>
-                                                        <select name="visual" id="" class="form-control @error('visual') is-invalid @enderror">
-                                                            <option disabled value="">-- Select Judgement --</option>
-                                                            <option value="OK" @if (old('visual') == 'OK')
-                                                                selected
-                                                            @endif>OK</option>
-                                                            <option value="PO" @if (old('visual') == 'PO')
-                                                                selected
-                                                            @endif>PO</option>
-                                                            <option value="OT" @if (old('visual') == 'OT')
-                                                                selected
-                                                            @endif>OT</option>
-                                                            <option value="IL" @if (old('visual') == 'IL')
-                                                                selected
-                                                            @endif>IL</option>
-                                                            <option value="OS" @if (old('visual') == 'OS')
-                                                                selected
-                                                            @endif>OS</option>
-                                                            <option value="LS" @if (old('visual') == 'LS')
-                                                                selected
-                                                            @endif>LS</option>
-                                                            <option value="OVAL" @if (old('visual') == 'OVAL')
-                                                                selected
-                                                            @endif>OVAL</option>
-                                                            <option value="TS" @if (old('visual') == 'TS')
-                                                                selected
-                                                            @endif>TS</option>
-                                                            <option value="BM" @if (old('visual') == 'BM')
-                                                                selected
-                                                            @endif>BM</option>
-                                                            <option value="CM" @if (old('visual') == 'CM')
-                                                                selected
-                                                            @endif>CM</option>
-                                                            <option value="SP" @if (old('visual') == 'SP')
-                                                                selected
-                                                            @endif>SP</option>
-                                                            <option value="MH" @if (old('visual') == 'MH')
-                                                                selected
-                                                            @endif>MH</option>
-                                                            <option value="RUSTY" @if (old('visual') == 'RUSTY')
-                                                                selected
-                                                            @endif>RUSTY</option>
+                                                        <select name="visual" id="visual-options" class="form-control @error('visual') is-invalid @enderror">
+                                                            
                                                         </select>
                                                         @error('visual')
                                                             <span class="text-danger help-block">{{$message}}</span>
@@ -841,6 +802,71 @@
                 }
             });
         }
+
+        $('#judgement-select').on('change',function(event)
+        {
+            if ($('#judgement-select').val() == '0') {
+                // console.log('bad selected');
+                $('#visual-options').html(
+                    '<option disabled selected value="">-- Select Judgement --</option>'+
+                    '<option value="PO" @if (old('visual') == 'PO')'+
+                        'selected'+
+                    '@endif>PO</option>'+
+                    '<option value="OT" @if (old('visual') == 'OT')'+
+                        'selected'+
+                    '@endif>OT</option>'+
+                    '<option value="IL" @if (old('visual') == 'IL')'+
+                        'selected'+
+                    '@endif>IL</option>'+
+                    '<option value="OS" @if (old('visual') == 'OS')'+
+                        'selected'+
+                    '@endif>OS</option>'+
+                    '<option value="LS" @if (old('visual') == 'LS')'+
+                        'selected'+
+                    '@endif>LS</option>'+
+                    '<option value="OVAL" @if (old('visual') == 'OVAL')'+
+                        'selected'+
+                    '@endif>OVAL</option>'+
+                    '<option value="TS" @if (old('visual') == 'TS')'+
+                        'selected'+
+                    '@endif>TS</option>'+
+                    '<option value="BM" @if (old('visual') == 'BM')'+
+                        'selected'+
+                    '@endif>BM</option>'+
+                    '<option value="CM" @if (old('visual') == 'CM')'+
+                        'selected'+
+                    '@endif>CM</option>'+
+                    '<option value="SP" @if (old('visual') == 'SP')'+
+                        'selected'+
+                    '@endif>SP</option>'+
+                    '<option value="MH" @if (old('visual') == 'MH')'+
+                        'selected'+
+                    '@endif>MH</option>'+
+                    '<option value="RUSTY" @if (old('visual') == 'RUSTY')'+
+                        'selected'+
+                    '@endif>RUSTY</option>'
+                );
+            }
+
+            if ($('#judgement-select').val() == '1') {
+                // console.log('Good selected');
+                $('#visual-options').html(
+                    '<option disabled selected value="">-- Select Judgement --</option>'+
+                    '<option value="OK" @if (old('visual') == 'OK')'+
+                        'selected'+
+                    '@endif>OK</option>'+
+                    '<option value="SP/OK" @if (old('visual') == 'SP/OK')'+
+                        'selected'+
+                    '@endif>SP/OK</option>'+
+                    '<option value="BM/OK" @if (old('visual') == 'BM/OK')'+
+                        'selected'+
+                    '@endif>BM/OK</option>'+
+                    '<option value="NG/OK" @if (old('visual') == 'NG/OK')'+
+                        'selected'+
+                    '@endif>NG/OK</option>'
+                );   
+            }
+        })
     })
 </script>
 @endpush

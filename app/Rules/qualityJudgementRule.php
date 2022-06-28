@@ -30,10 +30,17 @@ class qualityJudgementRule implements Rule
     public function passes($attribute, $value)
     {
         //
-        if ($this->quality_judgement == 0 && $this->quality_ng_judgement == 'OK') {
+
+        if (($this->quality_judgement == 0 && $this->quality_ng_judgement == 'OK')||
+        ($this->quality_judgement == 0 && $this->quality_ng_judgement == 'SP/OK')||
+        ($this->quality_judgement == 0 && $this->quality_ng_judgement == 'BM/OK')||
+        ($this->quality_judgement == 0 && $this->quality_ng_judgement == 'NG/OK')) {
             return false;
         }
-        if ($this->quality_judgement == 1 && $this->quality_ng_judgement != 'OK') {
+        if (($this->quality_judgement == 1 && $this->quality_ng_judgement != 'OK')|| 
+        ($this->quality_judgement == 1 && $this->quality_ng_judgement != 'SP/OK')|| 
+        ($this->quality_judgement == 1 && $this->quality_ng_judgement != 'BM/OK')||
+        ($this->quality_judgement == 1 && $this->quality_ng_judgement != 'NG/OK')) {
             return false;
         }
         return true;
