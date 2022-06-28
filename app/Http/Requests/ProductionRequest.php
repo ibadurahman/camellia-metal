@@ -39,8 +39,8 @@ class ProductionRequest extends FormRequest
             'panjang_aktual'    =>['required'],
             'berat_fg'          =>['required'],
             'pcs_per_bundle'    =>['required'],
-            'bundle_judgement'  =>['required', new qualityJudgementRule($qualityJudgement,$qualityNgJudgement)],
-            'visual'            =>['required', new qualityJudgementRule($qualityJudgement,$qualityNgJudgement)],
+            'bundle_judgement'  =>['required'],
+            'visual'            =>['required'],
         ];
     }
 
