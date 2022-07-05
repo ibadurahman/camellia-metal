@@ -37,7 +37,7 @@
                                         <th>Shape</th>
                                         <th>Kg per bundle (kg)</th>
                                         <th>Pcs per bundle (pcs)</th>
-                                        {{-- <th>Production Status</th> --}}
+                                        <th>Remarks</th>
                                         <th>Workorder Status</th>
                                         <th>Machine</th>
                                         <th>Created By</th>
@@ -78,6 +78,7 @@
                                         <th>FG Shape</th>
                                         <th>FG Kg per bundle (Kg)</th>
                                         <th>FG Pcs per bundle (Pcs)</th>
+                                        <th>Remarks</th>
                                         <th>Workorder Status</th>
                                         <th>Machine</th>
                                         <th>Created By</th>
@@ -123,6 +124,7 @@
                 {data:'fg_shape'},
                 {data:'fg_qty_kg'},
                 {data:'fg_qty_pcs'},
+                {data:'remarks'},
                 {data:'status_wo'},
                 {data:'machine'},
                 {data:'user'},  
@@ -160,6 +162,7 @@
                 {data:'fg_shape'},
                 {data:'fg_qty_kg'},
                 {data:'fg_qty_pcs'},
+                {data:'remarks'},
                 // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'machine'},

@@ -863,7 +863,10 @@
                     '@endif>BM/OK</option>'+
                     '<option value="NG/OK" @if (old('visual') == 'NG/OK')'+
                         'selected'+
-                    '@endif>NG/OK</option>'
+                    '@endif>NG/OK</option>'+
+                    '<option value="OT/OK" @if (old('visual') == 'OT/OK')'+
+                        'selected'+
+                    '@endif>OT/OK</option>'
                 );   
             }
         })

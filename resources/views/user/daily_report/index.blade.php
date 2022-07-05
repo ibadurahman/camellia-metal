@@ -61,6 +61,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="info-box bg-light">
+                                        <div class="info-box-content">
+                                            <span class="info-box-text text-center text-muted">Total Weight Loss (Kg)</span>
+                                            <span class="info-box-number text-center text-muted mb-0" id="total_weight_loss">0</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div> 
                     </div>   
@@ -101,7 +109,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Report Date</th>
+                                        <th>Wo Number</th>
                                         <th>Total Runtime</th>
                                         <th>Total Downtime</th>
                                         <th>Total Production (Pcs)</th>
@@ -109,6 +117,7 @@
                                         <th>Total Bad (Pcs)</th>
                                         <th>Total Weight FG</th>
                                         <th>Total Weight BB</th>
+                                        <th>Total Weight Loss</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -146,7 +155,7 @@
         },
         columns: [
             {data:'DT_RowIndex',orderable:false, searchable:false},
-            {data: 'created_at'},
+            {data: 'wo_number'},
             {data: 'total_runtime'},
             {data: 'total_downtime'},
             {data: 'total_pcs'},
@@ -154,6 +163,7 @@
             {data: 'total_pcs_bad'},
             {data: 'total_weight_fg'},
             {data: 'total_weight_bb'},
+            {data: 'weight_loss'},
             // {data: 'average_speed'}
         ],
         "paging": true,
@@ -191,6 +201,7 @@
                 $('#total_pcs_bad').html("Bad: " + response.total_pcs_bad);
                 $('#total_weight_fg').html(response.total_weight_fg);
                 $('#total_weight_bb').html(response.total_weight_bb);
+                $('#total_weight_loss').html(response.total_weight_loss);
             }
         });
     }

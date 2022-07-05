@@ -46,6 +46,12 @@ class DailyReportController extends Controller
                     }
 
                 })
+                ->addColumn('wo_number',function(DailyReport $model){
+                    return $model->workorder->wo_number;
+                })
+                ->addColumn('weight_loss',function(DailyReport $model){
+                    return $model->total_weight_bb - $model->total_weight_fg;
+                })
                 ->addColumn('created_at',function(DailyReport $model){
                     return date('Y-m-d H:i:s',strtotime($model->created_at));
                 })
@@ -72,6 +78,7 @@ class DailyReportController extends Controller
         $totalPcsBad    = 0;
         $totalWeightFg  = 0;
         $totalWeightBb  = 0;
+        $totalWeightLoss = 0;
         
         foreach ($searchResult->get() as $search) {
             $totalRuntime += $search->total_runtime;
@@ -81,7 +88,9 @@ class DailyReportController extends Controller
             $totalPcsBad += $search->total_pcs_bad;
             $totalWeightFg += $search->total_weight_fg;
             $totalWeightBb += $search->total_weight_bb;
+            
         }
+        $totalWeightLoss = $totalWeightBb - $totalWeightFg;
         
         return response()->json([
             'total_runtime'     => $totalRuntime,
@@ -91,6 +100,7 @@ class DailyReportController extends Controller
             'total_pcs_bad'         => $totalPcsBad,
             'total_weight_fg'   => $totalWeightFg,
             'total_weight_bb'   => $totalWeightBb,
+            'total_weight_loss' => $totalWeightLoss
         ],200);
     }
 
