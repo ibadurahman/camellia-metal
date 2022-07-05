@@ -37,6 +37,7 @@
                                         <th>Shape</th>
                                         <th>Kg per bundle (kg)</th>
                                         <th>Pcs per bundle (pcs)</th>
+                                        <th>Remarks</th>
                                         {{-- <th>Production Status</th> --}}
                                         <th>Workorder Status</th>
                                         <th>Machine</th>
@@ -81,6 +82,7 @@
                                         <th>Shape</th>
                                         <th>Kg per bundle (kg)</th>
                                         <th>Pcs per bundle (pcs)</th>
+                                        <th>Remarks</th>
                                         {{-- <th>Production Status</th> --}}
                                         <th>Workorder Status</th>
                                         <th>Machine</th>
@@ -122,6 +124,7 @@
                                         <th>FG Shape</th>
                                         <th>FG Kg per bundle (Kg)</th>
                                         <th>FG Pcs per bundle (Pcs)</th>
+                                        <th>Remarks</th>
                                         {{-- <th>Production Status</th> --}}
                                         <th>Workorder Status</th>
                                         <th>Machine</th>
@@ -169,6 +172,7 @@
                 {data:'fg_shape'},
                 {data:'fg_qty_kg'},
                 {data:'fg_qty_pcs'},
+                {data:'remarks'},
                 // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'machine'},
@@ -207,6 +211,7 @@
                 {data:'fg_shape'},
                 {data:'fg_qty_kg'},
                 {data:'fg_qty_pcs'},
+                {data:'remarks'},
                 // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'machine'},
@@ -280,6 +285,7 @@
                 {data:'fg_shape'},
                 {data:'fg_qty_kg'},
                 {data:'fg_qty_pcs'},
+                {data:'remarks'},
                 // {data:'status_prod'},
                 {data:'status_wo'},
                 {data:'machine'},

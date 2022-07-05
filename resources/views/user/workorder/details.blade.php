@@ -307,6 +307,11 @@
                             <h5 class="mt-5 text-muted">Others</h5>
                             <ul class="list-unstyled">
                                 <li>
+                                    <p href="" class="text-secondary"> Remarks: 
+                                        {{$workorder->remarks}}
+                                    </p>
+                                </li>
+                                <li>
                                     <p href="" class="text-secondary"> Status WO: 
                                         {{$workorder->status_wo}}
                                     </p>
